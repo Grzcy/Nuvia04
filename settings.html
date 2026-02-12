@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - Settings</title>
+    <title>Grazzy - Settings</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -897,9 +897,9 @@ main { padding-top: 80px; }
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo brand-logo" aria-label="Nuvia Home">
-                <img src="assets/security.png" alt="Nuvia" class="brand-logo-icon" onerror="this.style.display='none'">
-                <span>Nuvia</span>
+            <a href="/index.html" class="logo brand-logo" aria-label="Grazzy Home">
+                <img src="assets/security.png" alt="Grazzy" class="brand-logo-icon" onerror="this.style.display='none'">
+                <span>Grazzy</span>
             </a>
             <nav>
                 <ul></ul>
@@ -931,7 +931,7 @@ main { padding-top: 80px; }
         <div class="content-wrapper">
             <div class="section-card">
                 <h1>Settings</h1>
-                <p class="section-intro-text">Customize your JCHAT experience and manage your account.</p>
+                <p class="section-intro-text">Customize your Grazzy experience and manage your account.</p>
 
                 <h2>Account Management</h2>
                 <div class="form-group">
@@ -1441,7 +1441,7 @@ main { padding-top: 80px; }
         function showCustomConfirm(message) {
             return new Promise((resolve) => {
                 if (!customConfirmModal || !confirmModalMessage || !confirmYesBtn || !confirmNoBtn) {
-                    console.error("JCHAT_ERROR: Custom confirmation modal elements not found.");
+                    console.error("Grazzy_ERROR: Custom confirmation modal elements not found.");
                     resolve(false);
                     return;
                 }
@@ -1474,7 +1474,7 @@ main { padding-top: 80px; }
         function showDeleteAccountConfirm({ requirePassword = false } = {}) {
             return new Promise((resolve) => {
                 if (!deleteAccountModalOverlay || !deleteAccountConfirmBtn || !deleteAccountCancelBtn) {
-                    console.error('JCHAT_ERROR: Delete account modal elements not found.');
+                    console.error('Grazzy_ERROR: Delete account modal elements not found.');
                     resolve({ confirmed: false, password: '' });
                     return;
                 }
@@ -1493,7 +1493,7 @@ main { padding-top: 80px; }
 
                 if (requirePassword) {
                     deleteAccountPasswordGroup.hidden = false;
-                    deleteAccountHint.textContent = 'Enter the password you use for Nuvia to permanently delete your account.';
+                    deleteAccountHint.textContent = 'Enter the password you use for Grazzy to permanently delete your account.';
                     requestAnimationFrame(() => deleteAccountPasswordInput.focus());
                 } else {
                     deleteAccountPasswordGroup.hidden = true;
@@ -1607,7 +1607,7 @@ main { padding-top: 80px; }
 
                 if (docSnap.exists()) {
                     currentSettings = docSnap.data();
-                    console.log("JCHAT_DEBUG: Fetched settings:", currentSettings);
+                    console.log("Grazzy_DEBUG: Fetched settings:", currentSettings);
                 } else {
                     // Default settings if document doesn't exist
                     currentSettings = {
@@ -1656,7 +1656,7 @@ main { padding-top: 80px; }
                     };
                     // Create the document with default settings
                     await setDoc(settingsDocRef, currentSettings);
-                    console.log("JCHAT_DEBUG: Created default settings.");
+                    console.log("Grazzy_DEBUG: Created default settings.");
                 }
 
                 // Populate Account Management
@@ -1710,7 +1710,7 @@ main { padding-top: 80px; }
                 showMessageBox("Settings loaded!", 'success');
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching settings:", error);
+                console.error("Grazzy_ERROR: Error fetching settings:", error);
                 showMessageBox(`Error loading settings: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(saveSettingsButton, false);
@@ -1798,7 +1798,7 @@ main { padding-top: 80px; }
                 // Re-fetch settings to update UI
                 await fetchAllSettings();
             } catch (error) {
-                console.error("JCHAT_ERROR: Error adding user to block list:", error);
+                console.error("Grazzy_ERROR: Error adding user to block list:", error);
                 showMessageBox(`Failed to block user: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(addBlockUserButton, false);
@@ -1834,7 +1834,7 @@ main { padding-top: 80px; }
                 // Re-fetch settings to update UI
                 await fetchAllSettings();
             } catch (error) {
-                console.error("JCHAT_ERROR: Error removing user from block list:", error);
+                console.error("Grazzy_ERROR: Error removing user from block list:", error);
                 showMessageBox(`Failed to unblock user: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(buttonElement, false);
@@ -1913,9 +1913,9 @@ main { padding-top: 80px; }
                 if (authUpdateNeeded) {
                     try {
                         await updateProfile(currentUser, authUpdateData);
-                        console.log("JCHAT_DEBUG: Firebase Auth profile updated.");
+                        console.log("Grazzy_DEBUG: Firebase Auth profile updated.");
                     } catch (authError) {
-                        console.error("JCHAT_ERROR: Error updating Firebase Auth profile:", authError);
+                        console.error("Grazzy_ERROR: Error updating Firebase Auth profile:", authError);
                         showMessageBox(`Warning: Could not update Firebase Auth profile (${authError.message}).`, 'warning');
                     }
                 }
@@ -1938,7 +1938,7 @@ main { padding-top: 80px; }
                 showMessageBox("Settings saved successfully!", 'success');
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving settings:", error);
+                console.error("Grazzy_ERROR: Error saving settings:", error);
                 showMessageBox(`Failed to save settings: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(saveSettingsButton, false);
@@ -2019,7 +2019,7 @@ main { padding-top: 80px; }
             contactSupportButton.addEventListener('click', () => {
                 // Open WhatsApp chat
                 const whatsappNumber = "2349013790707";
-                const message = "Hello JCHAT Support, I need assistance with my account.";
+                const message = "Hello Grazzy Support, I need assistance with my account.";
                 window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
                 showMessageBox("Opening WhatsApp chat with support.", "info");
             });
@@ -2027,7 +2027,7 @@ main { padding-top: 80px; }
         if (reportBugButton) {
             reportBugButton.addEventListener('click', () => {
                 showMessageBox("Opening bug report form...", "info");
-                window.open('mailto:jchatguide@gmail.com?subject=Bug Report - JCHAT App&body=Please describe the bug you encountered:', '_blank');
+                window.open('mailto:jchatguide@gmail.com?subject=Bug Report - Grazzy App&body=Please describe the bug you encountered:', '_blank');
             });
         }
 
@@ -2037,35 +2037,35 @@ main { padding-top: 80px; }
                 // Delete user notifications
                 const notifCol = collection(db, "artifacts", appId, "users", uid, "notifications");
                 await (async()=>{ const snap = await getDocs(notifCol); let batch = writeBatch(db); let count = 0; for (const d of snap.docs){ batch.delete(d.ref); count++; if(count>=450){ await batch.commit(); batch = writeBatch(db); count=0; } } if (count>0) await batch.commit(); })();
-            }catch(e){ console.warn('JCHAT_WARN: notifications delete failed', e); }
+            }catch(e){ console.warn('Grazzy_WARN: notifications delete failed', e); }
             try{
                 // Delete private friends subcollection if exists
                 const privFriendsCol = collection(db, "artifacts", appId, "users", uid, "friends");
                 const snap = await getDocs(privFriendsCol); if(!snap.empty){ let batch = writeBatch(db); let count=0; for(const d of snap.docs){ batch.delete(d.ref); count++; if(count>=450){ await batch.commit(); batch = writeBatch(db); count=0; } } if(count>0) await batch.commit(); }
-            }catch(e){ console.warn('JCHAT_WARN: private friends delete failed', e); }
+            }catch(e){ console.warn('Grazzy_WARN: private friends delete failed', e); }
             try{
                 // Delete friend_requests (sender or receiver)
                 const frCol = collection(db, "artifacts", appId, "public", "data", "friend_requests");
                 for (const qy of [ query(frCol, where('senderId','==',uid)), query(frCol, where('receiverId','==',uid)) ]){
                     const snap = await getDocs(qy); if(!snap.empty){ let batch = writeBatch(db); let count=0; for(const d of snap.docs){ batch.delete(d.ref); count++; if(count>=450){ await batch.commit(); batch = writeBatch(db); count=0; } } if(count>0) await batch.commit(); }
                 }
-            }catch(e){ console.warn('JCHAT_WARN: friend_requests delete failed', e); }
+            }catch(e){ console.warn('Grazzy_WARN: friend_requests delete failed', e); }
             try{
                 // Delete friends entries where user is in either field
                 const friendsCol = collection(db, "artifacts", appId, "public", "data", "friends");
                 for (const qy of [ query(friendsCol, where('user1Id','==',uid)), query(friendsCol, where('user2Id','==',uid)) ]){
                     const snap = await getDocs(qy); if(!snap.empty){ let batch = writeBatch(db); let count=0; for(const d of snap.docs){ batch.delete(d.ref); count++; if(count>=450){ await batch.commit(); batch = writeBatch(db); count=0; } } if(count>0) await batch.commit(); }
                 }
-            }catch(e){ console.warn('JCHAT_WARN: friends delete failed', e); }
+            }catch(e){ console.warn('Grazzy_WARN: friends delete failed', e); }
             try{
                 // Delete posts authored by user
                 const postsCol = collection(db, "artifacts", appId, "public", "data", "posts");
                 const snap = await getDocs(query(postsCol, where('authorId','==',uid)));
                 if(!snap.empty){ let batch = writeBatch(db); let count=0; for(const d of snap.docs){ batch.delete(d.ref); count++; if(count>=450){ await batch.commit(); batch = writeBatch(db); count=0; } } if(count>0) await batch.commit(); }
-            }catch(e){ console.warn('JCHAT_WARN: posts delete failed', e); }
-            try{ await deleteDoc(doc(db, "artifacts", appId, "users", uid, "profiles", "user_settings")); }catch(e){ console.warn('JCHAT_WARN: user_settings delete failed', e); }
-            try{ await deleteDoc(doc(db, "artifacts", appId, "users", uid, "profiles", "user_profile")); }catch(e){ console.warn('JCHAT_WARN: user_profile delete failed', e); }
-            try{ await deleteDoc(doc(db, "artifacts", appId, "public", "data", "users", uid)); }catch(e){ console.warn('JCHAT_WARN: public user delete failed', e); }
+            }catch(e){ console.warn('Grazzy_WARN: posts delete failed', e); }
+            try{ await deleteDoc(doc(db, "artifacts", appId, "users", uid, "profiles", "user_settings")); }catch(e){ console.warn('Grazzy_WARN: user_settings delete failed', e); }
+            try{ await deleteDoc(doc(db, "artifacts", appId, "users", uid, "profiles", "user_profile")); }catch(e){ console.warn('Grazzy_WARN: user_profile delete failed', e); }
+            try{ await deleteDoc(doc(db, "artifacts", appId, "public", "data", "users", uid)); }catch(e){ console.warn('Grazzy_WARN: public user delete failed', e); }
         }
 
         async function attemptDeleteAuthUser(passwordForReauth = ''){
@@ -2118,14 +2118,14 @@ main { padding-top: 80px; }
                 showMessageBox('Your account was deleted.', 'success');
                 setTimeout(()=>{ window.location.href = '/login.html'; }, 1500);
             }catch(e){
-                console.error('JCHAT_ERROR: self delete failed', e);
+                console.error('Grazzy_ERROR: self delete failed', e);
                 showMessageBox(e.message || 'Failed to delete account. Please try again.', 'error');
                 deleteAccountButton.disabled = false;
             }
         }
         if (changePasswordButton) {
             changePasswordButton.addEventListener('click', async () => {
-                showMessageBox("To change your password, please visit the JCHAT web portal for a secure process.", "info");
+                showMessageBox("To change your password, please visit the Grazzy web portal for a secure process.", "info");
                 // In a real app, this might link to a Firebase password reset page or a custom portal.
                 // window.open('https://jchat.example.com/reset-password', '_blank');
             });
@@ -2223,7 +2223,7 @@ main { padding-top: 80px; }
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
-                console.log("JCHAT_DEBUG: User authenticated in Settings Page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Settings Page:", user.uid);
                 await fetchAndDisplayHeaderProfile(user);
                 fetchNotificationCount(user.uid);
                 await fetchAllSettings(); // Fetch and populate all settings
@@ -2269,18 +2269,18 @@ main { padding-top: 80px; }
                 }
 
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                     // onAuthStateChanged will be triggered again with the new user
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';
                     }
@@ -2400,7 +2400,7 @@ main { padding-top: 80px; }
                 successSynth.triggerAttackRelease('C5', '8n');
                 showMessageBox('Code redeemed! Your perks are unlocked.', 'success');
             } catch (e) {
-                console.error('JCHAT_ERROR: Redeem failed:', e);
+                console.error('Grazzy_ERROR: Redeem failed:', e);
                 errorSynth.triggerAttackRelease('A3', '8n');
                 showMessageBox(e.message || 'Redeem failed. Try again.', 'error');
             } finally {

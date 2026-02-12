@@ -6,11 +6,11 @@
   }
   function sharePost(postId, options){
     var url = buildShareUrl(postId, options||{});
-    var title = (options && options.title) || 'Nuvia';
+    var title = (options && options.title) || 'Grazzy';
     if (navigator.share){ return navigator.share({ title: title, url: url }).catch(function(){}); }
     try { navigator.clipboard.writeText(url); alert('Link copied'); } catch(_) { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank'); }
   }
-  window.NuviaShare = { buildShareUrl: buildShareUrl, sharePost: sharePost };
+  window.GrazzyShare = { buildShareUrl: buildShareUrl, sharePost: sharePost };
 })();
 
 // Global scroll/state persistence and instant "Back" behavior

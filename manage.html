@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvia - Admin Dashboard</title>
+    <title>Grazzy - Admin Dashboard</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1357,7 +1357,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Nuvia Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <ul>
                     <!-- Removed Home and Profile links from header navigation -->
@@ -1780,11 +1780,11 @@
     <div id="maintenanceOverlay" role="dialog" aria-modal="true" aria-labelledby="maintenanceOverlayTitle">
         <i class="fas fa-tools" role="img" aria-label="Maintenance Icon"></i>
         <h2 id="maintenanceOverlayTitle">Maintenance Mode</h2>
-        <p id="maintenanceAnnouncementText">JCHAT is currently undergoing scheduled maintenance. We'll be back online shortly!</p>
+        <p id="maintenanceAnnouncementText">Grazzy is currently undergoing scheduled maintenance. We'll be back online shortly!</p>
     </div>
 
     <script type="module">
-        console.log("JCHAT_DEBUG: Admin.html script started.");
+        console.log("Grazzy_DEBUG: Admin.html script started.");
 
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -1979,7 +1979,7 @@
 
         // --- Utility Functions ---
         function showMessageBox(message, type, isPersistent = false, durationMs = 3000) {
-            if (!messageBox) { console.error("JCHAT_ERROR: messageBox element not found."); return; }
+            if (!messageBox) { console.error("Grazzy_ERROR: messageBox element not found."); return; }
             if (messageBox.timeoutId) { clearTimeout(messageBox.timeoutId); }
 
             messageBox.innerHTML = `<i id="messageBoxIcon"></i><span id="messageBoxText"></span>`;
@@ -2017,7 +2017,7 @@
         function showConfirmationModal(title, message) {
             return new Promise((resolve) => {
                 if (!confirmationTitle || !confirmationMessage || !confirmationModal || !confirmProceedButton || !confirmCancelButton) {
-                    console.error("JCHAT_ERROR: Confirmation modal elements not found.");
+                    console.error("Grazzy_ERROR: Confirmation modal elements not found.");
                     resolve(false);
                     return;
                 }
@@ -2109,7 +2109,7 @@
                     imgElement.style.display = 'block';
                     if (iconElement) iconElement.style.display = 'none';
                     imgElement.onerror = () => {
-                        console.error(`JCHAT_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
+                        console.error(`Grazzy_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
                         imgElement.src = `https://placehold.co/120x120/CCCCCC/000000?text=${usernameInitial}`;
                         imgElement.style.display = 'block';
                         if (iconElement) iconElement.style.display = 'none';
@@ -2134,7 +2134,7 @@
                     window.location.href = '/login.html';
                 }, 1000);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error logging out:", error);
+                console.error("Grazzy_ERROR: Error logging out:", error);
                 showMessageBox("Failed to log out. Please try again.", 'error');
             }
         }
@@ -2170,7 +2170,7 @@
                     if (profileData.socialLinks === undefined) { await updateDoc(privateProfileDocRef, { socialLinks: "" }); profileData.socialLinks = ""; }
                     if (profileData.banned === undefined) { await updateDoc(privateProfileDocRef, { banned: false }); profileData.banned = false; } // New: banned field
 
-                    console.log("JCHAT_DEBUG: Fetched existing profile data for header:", profileData);
+                    console.log("Grazzy_DEBUG: Fetched existing profile data for header:", profileData);
                 } else {
                     // Create a basic profile if it doesn't exist
                     profileData = {
@@ -2190,7 +2190,7 @@
                         banned: false // New: default to not banned
                     };
                     await setDoc(privateProfileDocRef, profileData);
-                    console.log("JCHAT_DEBUG: Created new profile data for header:", profileData);
+                    console.log("Grazzy_DEBUG: Created new profile data for header:", profileData);
 
                     // Also create/update public profile
                     const publicProfileDocRef = doc(db, "artifacts", appId, "public", "data", "users", user.uid);
@@ -2209,7 +2209,7 @@
                 // Update header UI
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 if (headerNavLinkProfile) headerNavLinkProfile.href = `/profile.html?userId=${user.uid}`;
 
                 // Show Admin Icon if current user is admin
@@ -2222,10 +2222,10 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                if (headerDisplayName) headerDisplayName.textContent = user.displayName || "JCHAT User";
+                if (headerDisplayName) headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
             }
         }
@@ -2252,7 +2252,7 @@
                     }
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching notification count:", error);
+                console.error("Grazzy_ERROR: Error fetching notification count:", error);
                 if (notificationCountElement) notificationCountElement.style.display = 'none';
             }
         }
@@ -2339,7 +2339,7 @@
             } else if (level >= 101 && level <= 250) {
                 jCoinReward = 750 + (level - 101) * 12;
                 gasReward = 150 + (level - 101) * 5;
-                const tierNames = ["Dedicated User", "JCHAT Elite", "Master Communicator", "Community Architect"];
+                const tierNames = ["Dedicated User", "Grazzy Elite", "Master Communicator", "Community Architect"];
                 const tierIcons = ["fas fa-user-shield", "fas fa-gem", "fas fa-microphone-alt", "fas fa-sitemap"];
                 const tierIndex = Math.floor((level - 101) / 37);
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -2350,13 +2350,13 @@
                 if (level === 125) otherRewards.push("Title: 'Rising Star'", "Unlock: Custom Chat Font (Style 1)");
                 if (level === 130) otherRewards.push("Unlock: 7-Day XP Boost");
                 if (level === 140) otherRewards.push("Permanent: 3% JCoin Shop Discount");
-                if (level === 150) otherRewards.push("Badge: 'JCHAT Expert'", "Unlock: Premium Profile Theme (Animated 1)");
+                if (level === 150) otherRewards.push("Badge: 'Grazzy Expert'", "Unlock: Premium Profile Theme (Animated 1)");
                 if (level === 160) otherRewards.push("Increased Group Member Capacity (+5)");
                 if (level === 170) otherRewards.push("Unlock: Animated Emote Pack (Set 2)");
                 if (level === 175) otherRewards.push("Title: 'Elite Communicator'", "Unlock: Custom Chat Font (Style 2)");
                 if (level === 180) otherRewards.push("Increased Message Character Limit (+25)");
                 if (level === 190) otherRewards.push("Permanent: 4% JCoin Shop Discount");
-                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'JCHAT Champion'", "Unlock: Exclusive 'Golden' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
+                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'Grazzy Champion'", "Unlock: Exclusive 'Golden' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
                 if (level === 210) otherRewards.push("Increased Media Upload Size (+10MB)");
                 if (level === 220) otherRewards.push("Unlock: Premium Profile Theme (Animated 2)");
                 if (level === 230) otherRewards.push("Unlock: Rare Emote Pack (Set 2)");
@@ -2366,7 +2366,7 @@
             } else if (level >= 251 && level <= 400) {
                 jCoinReward = 2500 + (level - 251) * 20;
                 gasReward = 500 + (level - 251) * 10;
-                const tierNames = ["JCHAT Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
+                const tierNames = ["Grazzy Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
                 const tierIcons = ["fas fa-star-half-alt", "fas fa-chess-king", "fas fa-galaxy", "fas fa-infinity"];
                 const tierIndex = Math.floor((level - 251) / 37);
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -2375,11 +2375,11 @@
                 if (level === 260) otherRewards.push("Permanent: 5% JCoin Shop Discount");
                 if (level === 275) otherRewards.push("Title: 'Grand Strategist'", "Unlock: Legendary Emote Pack (Set 1)");
                 if (level === 290) otherRewards.push("Increased Group Creation Limit (+2)");
-                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'JCHAT Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
+                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'Grazzy Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
                 if (level === 310) otherRewards.push("Increased Media Upload Size (+15MB)");
                 if (level === 325) otherRewards.push("Title: 'Cosmic Weaver'", "Unlock: Custom Chat Font (Style 3)");
                 if (level === 340) otherRewards.push("Permanent: 7% JCoin Shop Discount");
-                if (level === 350) otherRewards.push("Badge: 'JCHAT Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
+                if (level === 350) otherRewards.push("Badge: 'Grazzy Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
                 if (level === 360) otherRewards.push("Increased Group Member Capacity (+10)");
                 if (level === 375) otherRewards.push("Title: 'The Eternal Flame'", "Unlock: Legendary Emote Pack (Set 2)");
                 if (level === 390) otherRewards.push("Ad-Free Experience (1 Month)");
@@ -2388,7 +2388,7 @@
             } else if (level >= 401 && level <= 500) {
                 jCoinReward = 5000 + (level - 401) * 30;
                 gasReward = 1000 + (level - 401) * 15;
-                const tierNames = ["The Unrivaled", "Cosmic Creator", "JCHAT Deity", "Apex Being"];
+                const tierNames = ["The Unrivaled", "Cosmic Creator", "Grazzy Deity", "Apex Being"];
                 const tierIcons = ["fas fa-infinity", "fas fa-solar-system", "fas fa-hand-holding-heart", "fas fa-star-and-crescent"];
                 const tierIndex = Math.floor((level - 401) / 25);
                 name = `${tierNames[tierIndex % tierIcons.length]} Lv. ${level}`;
@@ -2404,11 +2404,11 @@
                 if (level === 490) otherRewards.push("Unlock: Exclusive 'Cosmic' Animated Avatar Frame");
                 if (level === 500) {
                     otherRewards.push(
-                        "Badge: 'JCHAT Deity'",
+                        "Badge: 'Grazzy Deity'",
                         "Title: 'The Absolute'",
                         "Lifetime Premium Status (Ad-Free, All Cosmetics Unlocked)",
                         "Personalized Group Creation Perk (Custom starting benefits for new groups)",
-                        "Acknowledgment on JCHAT Hall of Fame (Your name/ID listed on a special page)",
+                        "Acknowledgment on Grazzy Hall of Fame (Your name/ID listed on a special page)",
                         "Exclusive Discord Role (if applicable)",
                         "Voting Rights on Future Feature Development"
                     );
@@ -2498,10 +2498,10 @@
                     if (levelInfo.otherRewards.length > 0) {
                         levelsGainedMessages[levelsGainedMessages.length - 1] += ` Unlocked: ${levelInfo.otherRewards.join(', ')}.`;
                     }
-                    console.log(`JCHAT_DEBUG: User ${userId} leveled up to ${currentLevel}.`);
+                    console.log(`Grazzy_DEBUG: User ${userId} leveled up to ${currentLevel}.`);
 
                 } catch (transactionError) {
-                    console.error("JCHAT_ERROR: Transaction failed during level-up:", transactionError);
+                    console.error("Grazzy_ERROR: Transaction failed during level-up:", transactionError);
                     showMessageBox(`Failed to apply level-up rewards for Level ${currentLevel}: ${transactionError.message}`, 'error');
                     break;
                 }
@@ -2541,7 +2541,7 @@
             if (unsubscribeLookedUpUserListener) {
                 unsubscribeLookedUpUserListener();
                 unsubscribeLookedUpUserListener = null;
-                console.log("JCHAT_DEBUG: Unsubscribed from looked-up user's profile.");
+                console.log("Grazzy_DEBUG: Unsubscribed from looked-up user's profile.");
             }
         }
 
@@ -2634,7 +2634,7 @@
                     if (docSnap.exists()) {
                         lookedUpUserProfileData = docSnap.data();
                         lookedUpUserProfileData.userId = userIdFound; // Add userId to the data object
-                        console.log("JCHAT_DEBUG: Looked-up user profile data (real-time):", lookedUpUserProfileData);
+                        console.log("Grazzy_DEBUG: Looked-up user profile data (real-time):", lookedUpUserProfileData);
 
                         // Update UI with fetched data
                         lookedUpUsernameDisplay.textContent = lookedUpUserProfileData.username || 'N/A';
@@ -2668,14 +2668,14 @@
                         lookedUpUserId = null; // Reset lookedUpUserId
                     }
                 }, (error) => {
-                    console.error("JCHAT_ERROR: Error listening to user profile:", error);
+                    console.error("Grazzy_ERROR: Error listening to user profile:", error);
                     showMessageBox(`Error fetching user profile: ${error.message}`, 'error');
                     clearUserDetailsDisplay();
                     lookedUpUserId = null;
                 });
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error during user lookup:", error);
+                console.error("Grazzy_ERROR: Error during user lookup:", error);
                 showMessageBox(`Failed to lookup user: ${error.message}`, 'error');
                 clearUserDetailsDisplay();
                 lookedUpUserId = null;
@@ -2734,7 +2734,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error updating user level:", error);
+                console.error("Grazzy_ERROR: Error updating user level:", error);
                 showMessageBox(`Failed to update level: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -2779,7 +2779,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error crediting JCoins:", error);
+                console.error("Grazzy_ERROR: Error crediting JCoins:", error);
                 showMessageBox(`Failed to credit JCoins: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -2825,7 +2825,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deducting JCoins:", error);
+                console.error("Grazzy_ERROR: Error deducting JCoins:", error);
                 showMessageBox(`Failed to deduct JCoins: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -2885,7 +2885,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error crediting Gas:", error);
+                console.error("Grazzy_ERROR: Error crediting Gas:", error);
                 showMessageBox(`Failed to credit Gas: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -2943,7 +2943,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deducting Gas:", error);
+                console.error("Grazzy_ERROR: Error deducting Gas:", error);
                 showMessageBox(`Failed to deduct Gas: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -2976,7 +2976,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error toggling wallet lock:", error);
+                console.error("Grazzy_ERROR: Error toggling wallet lock:", error);
                 showMessageBox(`Failed to toggle wallet lock: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3018,7 +3018,7 @@
                 playNotificationSound('success');
                 // The onSnapshot listener will automatically refresh the UI
             } catch (error) {
-                console.error("JCHAT_ERROR: Error toggling ban status:", error);
+                console.error("Grazzy_ERROR: Error toggling ban status:", error);
                 showMessageBox(`Failed to toggle ban status: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3069,7 +3069,7 @@
                 showMessageBox(`Daily bonus of ${dailyBonusAmount} JCoins granted to ${lookedUpUserProfileData.username}!`, 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error granting daily bonus:", error);
+                console.error("Grazzy_ERROR: Error granting daily bonus:", error);
                 showMessageBox(`Failed to grant daily bonus: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3119,7 +3119,7 @@
                 playNotificationSound('success');
                 adminMessageInput.value = ''; // Clear input field
             } catch (error) {
-                console.error("JCHAT_ERROR: Error sending admin message:", error);
+                console.error("Grazzy_ERROR: Error sending admin message:", error);
                 showMessageBox(`Failed to send message: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3198,7 +3198,7 @@
                 // For simplicity, we assume chat messages will remain and just not be linked to a profile.
                 // To delete messages, you would need to iterate through all chat rooms, find messages by this user,
                 // and delete them. This would be too slow and potentially hit limits for a client-side operation.
-                console.warn("JCHAT_WARNING: Chat messages for this user are NOT deleted by this client-side function. A Cloud Function is recommended for full chat data purging.");
+                console.warn("Grazzy_WARNING: Chat messages for this user are NOT deleted by this client-side function. A Cloud Function is recommended for full chat data purging.");
 
                 await batch.commit();
 
@@ -3206,7 +3206,7 @@
                 playNotificationSound('success');
                 clearUserDetailsDisplay(); // Clear and hide the user details section
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deleting user account:", error);
+                console.error("Grazzy_ERROR: Error deleting user account:", error);
                 showMessageBox(`Failed to delete user account: ${error.message}. Please check console for details.`, 'error', true);
                 playNotificationSound('error');
             } finally {
@@ -3287,7 +3287,7 @@
                     });
                 }
             }, (error) => {
-                console.error("JCHAT_ERROR: Error fetching pending JCoin requests:", error);
+                console.error("Grazzy_ERROR: Error fetching pending JCoin requests:", error);
                 showMessageBox(`Failed to load pending requests: ${error.message}`, 'error');
                 noPendingRequestsMessage.style.display = 'block';
                 pendingRequestsList.innerHTML = '';
@@ -3340,7 +3340,7 @@
                 showMessageBox("JCoin request approved and JCoins credited!", 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error approving JCoin request:", error);
+                console.error("Grazzy_ERROR: Error approving JCoin request:", error);
                 showMessageBox(`Failed to approve request: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3367,7 +3367,7 @@
                 showMessageBox("JCoin request rejected.", 'info');
                 playNotificationSound('info');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error rejecting JCoin request:", error);
+                console.error("Grazzy_ERROR: Error rejecting JCoin request:", error);
                 showMessageBox(`Failed to reject request: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3450,9 +3450,9 @@
          * Fetches and displays pending activity rewards in real-time.
          */
         async function fetchAndDisplayPendingRewards() {
-            console.log("JCHAT_DEBUG: Fetching pending rewards...");
+            console.log("Grazzy_DEBUG: Fetching pending rewards...");
             if (!pendingRewardsTableBody) {
-                console.error("JCHAT_CRITICAL_ERROR: 'pendingRewardsTableBody' element not found.");
+                console.error("Grazzy_CRITICAL_ERROR: 'pendingRewardsTableBody' element not found.");
                 return;
             }
 
@@ -3467,7 +3467,7 @@
             const q = query(pendingRewardsCollectionRef, where("status", "==", "pending"));
 
             unsubscribe = onSnapshot(q, (querySnapshot) => {
-                console.log("JCHAT_DEBUG: onSnapshot for pending rewards triggered. Count:", querySnapshot.size);
+                console.log("Grazzy_DEBUG: onSnapshot for pending rewards triggered. Count:", querySnapshot.size);
                 pendingRewardsTableBody.innerHTML = ''; // Clear existing rows.
                 allPendingRewardsData.clear(); // Clear the map of all pending rewards.
 
@@ -3486,7 +3486,7 @@
                 }
                 updateSelectedRewardsState(); // Update checkbox states after rendering.
             }, (error) => {
-                console.error("JCHAT_ERROR: Error listening to pending rewards:", error);
+                console.error("Grazzy_ERROR: Error listening to pending rewards:", error);
                 showMessageBox(`Error loading rewards: ${error.message}`, 'error', true);
             });
             unsubscribe.name = 'pendingRewardsListener'; // Give it a name for easier management.
@@ -3590,7 +3590,7 @@
                 showMessageBox("Reward approved and user credited successfully!", 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error approving reward:", error);
+                console.error("Grazzy_ERROR: Error approving reward:", error);
                 showMessageBox(`Failed to approve reward: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3626,7 +3626,7 @@
                 showMessageBox("Reward rejected successfully!", 'info');
                 playNotificationSound('info');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error rejecting reward:", error);
+                console.error("Grazzy_ERROR: Error rejecting reward:", error);
                 showMessageBox(`Failed to reject reward: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3688,7 +3688,7 @@
                 selectedRewardIds.clear(); // Clear selection after successful batch.
                 updateSelectedRewardsState(); // Update UI.
             } catch (error) {
-                console.error("JCHAT_ERROR: Error approving selected rewards batch:", error);
+                console.error("Grazzy_ERROR: Error approving selected rewards batch:", error);
                 showMessageBox(`Failed to approve selected rewards: ${error.message}. Some may not have been processed.`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3705,14 +3705,14 @@
          * If settings document doesn't exist, it creates it with default values.
          */
         async function fetchSystemSettings() {
-            console.log("JCHAT_DEBUG: Fetching system settings...");
+            console.log("Grazzy_DEBUG: Fetching system settings...");
             try {
                 const docSnap = await getDoc(SYSTEM_SETTINGS_DOC_REF);
                 if (docSnap.exists()) {
                     currentSystemSettings = docSnap.data();
-                    console.log("JCHAT_DEBUG: System settings fetched:", currentSystemSettings);
+                    console.log("Grazzy_DEBUG: System settings fetched:", currentSystemSettings);
                 } else {
-                    console.warn("JCHAT_WARNING: System settings document not found. Initializing with default values.");
+                    console.warn("Grazzy_WARNING: System settings document not found. Initializing with default values.");
                     currentSystemSettings = {
                         jcoinNairaRate: 7.5, gasJcoinRate: 0.1, dailyBonusAmount: 50,
                         profanityFilterSensitivity: 5,
@@ -3723,12 +3723,12 @@
                         announcementEndTime: null,   // New default
                     };
                     await setDoc(SYSTEM_SETTINGS_DOC_REF, currentSystemSettings);
-                    console.log("JCHAT_DEBUG: Default system settings created.");
+                    console.log("Grazzy_DEBUG: Default system settings created.");
                 }
                 populateSystemSettingsUI(currentSystemSettings);
                 applySystemSettings(currentSystemSettings); // Apply maintenance mode etc.
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching system settings:", error);
+                console.error("Grazzy_ERROR: Error fetching system settings:", error);
                 showMessageBox(`Failed to load system settings: ${error.message}`, 'error', true);
             }
         }
@@ -3810,7 +3810,7 @@
                 showMessageBox("System settings saved successfully!", 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving system settings:", error);
+                console.error("Grazzy_ERROR: Error saving system settings:", error);
                 showMessageBox(`Failed to save settings: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -3824,7 +3824,7 @@
          * @param {object} settings - The system settings object.
          */
         function applySystemSettings(settings) {
-            console.log("JCHAT_DEBUG: Applying system settings to Admin UI:", settings);
+            console.log("Grazzy_DEBUG: Applying system settings to Admin UI:", settings);
             const isCurrentUserAdmin = currentUser && currentUser.uid === ADMIN_UID;
             const now = new Date();
 
@@ -3867,20 +3867,20 @@
                     // Admin bypasses maintenance overlay.
                     if (maintenanceOverlay) maintenanceOverlay.classList.remove('active');
                     document.body.style.overflow = 'auto';
-                    showMessageBox("JCHAT is in Maintenance Mode, but you (Admin) have full access.", 'info', true);
+                    showMessageBox("Grazzy is in Maintenance Mode, but you (Admin) have full access.", 'info', true);
                 } else {
                     // Non-admin sees maintenance overlay.
                     if (maintenanceOverlay) {
                         maintenanceOverlay.classList.add('active');
                         if (maintenanceAnnouncementText) {
-                            maintenanceAnnouncementText.textContent = currentAnnouncement || "JCHAT is currently undergoing scheduled maintenance. We'll be back online shortly!";
+                            maintenanceAnnouncementText.textContent = currentAnnouncement || "Grazzy is currently undergoing scheduled maintenance. We'll be back online shortly!";
                         }
                     }
                     document.body.style.overflow = 'hidden';
                     // Redirect non-admins if maintenance mode is active.
                     if (window.location.pathname !== '/login.html') {
                         window.location.href = '/login.html'; // Redirect to login page
-                        showMessageBox("JCHAT is currently in maintenance mode. Please try again later.", 'warning', true);
+                        showMessageBox("Grazzy is currently in maintenance mode. Please try again later.", 'warning', true);
                         playNotificationSound('error');
                     }
                 }
@@ -3896,7 +3896,7 @@
          * Fetches and displays reported content and users in real-time.
          */
         async function fetchAndDisplayReportedContent() {
-            console.log("JCHAT_DEBUG: Fetching reported content...");
+            console.log("Grazzy_DEBUG: Fetching reported content...");
             if (!reportedContentTableBody) return;
 
             if (unsubscribeReportedContentListener) {
@@ -3950,7 +3950,7 @@
                     });
                 }
             }, (error) => {
-                console.error("JCHAT_ERROR: Error listening to reported content:", error);
+                console.error("Grazzy_ERROR: Error listening to reported content:", error);
                 showMessageBox(`Error loading reports: ${error.message}`, 'error');
             });
             unsubscribeListeners.push(unsubscribeReportedContentListener);
@@ -3971,7 +3971,7 @@
 
             // Ensure reportedId is a string before proceeding with actions that use it
             if ((action === 'warn' || action === 'delete_content') && (!reportData.reportedId || typeof reportData.reportedId !== 'string')) {
-                console.error(`JCHAT_ERROR: Reported User ID is missing or invalid for report ${reportId}. Report data:`, reportData);
+                console.error(`Grazzy_ERROR: Reported User ID is missing or invalid for report ${reportId}. Report data:`, reportData);
                 showMessageBox("Error: Reported user ID is missing or invalid in the report data. Cannot perform action.", 'error');
                 playNotificationSound('error');
                 return; // Exit the function early
@@ -4036,7 +4036,7 @@
                 showMessageBox(`Report ${reportId.substring(0, 8)}... action "${action}" completed successfully!`, 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error(`JCHAT_ERROR: Error performing action ${action} on report ${reportId}:`, error);
+                console.error(`Grazzy_ERROR: Error performing action ${action} on report ${reportId}:`, error);
                 showMessageBox(`Failed to complete action: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -4049,7 +4049,7 @@
          * Fetches and displays recent public posts.
          */
         async function fetchAndDisplayPublicPosts() {
-            console.log("JCHAT_DEBUG: Fetching public posts...");
+            console.log("Grazzy_DEBUG: Fetching public posts...");
             if (!publicPostsTableBody) return;
 
             if (unsubscribePublicPostsListener) {
@@ -4117,7 +4117,7 @@
                     }
                 }
             }, (error) => {
-                console.error("JCHAT_ERROR: Error listening to public posts:", error);
+                console.error("Grazzy_ERROR: Error listening to public posts:", error);
                 showMessageBox(`Error loading public posts: ${error.message}`, 'error');
             });
             unsubscribeListeners.push(unsubscribePublicPostsListener);
@@ -4145,7 +4145,7 @@
                 showMessageBox(`Post ${postId} deleted successfully!`, 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deleting post:", error);
+                console.error("Grazzy_ERROR: Error deleting post:", error);
                 showMessageBox(`Failed to delete post: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -4226,7 +4226,7 @@
                 }
                 showMessageBox('Users filtered successfully.', 'success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error filtering global users:", error);
+                console.error("Grazzy_ERROR: Error filtering global users:", error);
                 showMessageBox(`Failed to filter users: ${error.message}`, 'error');
             }
         }
@@ -4234,7 +4234,7 @@
 
         // --- Authentication State Listener ---
         onAuthStateChanged(auth, async (user) => {
-            console.log("JCHAT_DEBUG: onAuthStateChanged triggered. User:", user ? user.uid : "null");
+            console.log("Grazzy_DEBUG: onAuthStateChanged triggered. User:", user ? user.uid : "null");
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
@@ -4255,15 +4255,15 @@
                     unsubscribeSystemSettingsListener = onSnapshot(SYSTEM_SETTINGS_DOC_REF, (docSnap) => {
                         if (docSnap.exists()) {
                             currentSystemSettings = docSnap.data();
-                            console.log("JCHAT_DEBUG: Real-time system settings update for admin:", currentSystemSettings);
+                            console.log("Grazzy_DEBUG: Real-time system settings update for admin:", currentSystemSettings);
                             populateSystemSettingsUI(currentSystemSettings); // Update UI elements
                             applySystemSettings(currentSystemSettings); // Apply maintenance mode etc.
                         } else {
-                            console.warn("JCHAT_WARNING: System settings document not found during snapshot. Re-fetching.");
+                            console.warn("Grazzy_WARNING: System settings document not found during snapshot. Re-fetching.");
                             fetchSystemSettings();
                         }
                     }, (error) => {
-                        console.error("JCHAT_ERROR: Error listening to system settings:", error);
+                        console.error("Grazzy_ERROR: Error listening to system settings:", error);
                         showMessageBox("Failed to get real-time settings updates.", 'error', true);
                     });
                     unsubscribeListeners.push(unsubscribeSystemSettingsListener); // Add to global unsubscribe list
@@ -4275,7 +4275,7 @@
                     const userProfileDocRef = doc(db, "artifacts", appId, "users", user.uid, "profiles", "user_profile");
                     const userProfileSnap = await getDoc(userProfileDocRef);
                     if (userProfileSnap.exists() && userProfileSnap.data().banned) {
-                        console.log("JCHAT_DEBUG: Banned user detected. Redirecting to login page.");
+                        console.log("Grazzy_DEBUG: Banned user detected. Redirecting to login page.");
                         showMessageBox("Your account has been banned. Please contact support.", 'error', true);
                         playNotificationSound('error');
                         setTimeout(async () => {
@@ -4285,7 +4285,7 @@
                         return; // Stop further execution for banned users
                     }
 
-                    console.log("JCHAT_DEBUG: Non-admin user detected. Redirecting to home page.");
+                    console.log("Grazzy_DEBUG: Non-admin user detected. Redirecting to home page.");
                     showMessageBox("Access Denied. You are not authorized to view this page.", 'error', true);
                     playNotificationSound('error');
                     setTimeout(() => {
@@ -4293,18 +4293,18 @@
                     }, 2000);
                 }
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                     // onAuthStateChanged will be triggered again with the new user
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';
                         return;
@@ -4324,7 +4324,7 @@
                     await fetchSystemSettings();
                 } else {
                     // If still no user or not admin after anonymous attempt, redirect.
-                    console.log("JCHAT_DEBUG: Anonymous/Custom Token Auth successful but not admin. Redirecting.");
+                    console.log("Grazzy_DEBUG: Anonymous/Custom Token Auth successful but not admin. Redirecting.");
                     showMessageBox("Access Denied: Please log in as an administrator.", 'error', true);
                     playNotificationSound('error');
                     setTimeout(() => {
@@ -4336,7 +4336,7 @@
 
         // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("JCHAT_DEBUG: DOMContentLoaded fired.");
+            console.log("Grazzy_DEBUG: DOMContentLoaded fired.");
             // Apply theme on load
             const savedTheme = localStorage.getItem('jchat-theme');
             const themes = ['theme-dark-mode'];
@@ -4519,7 +4519,7 @@
             unsubscribeReportedContentListener = null; // New: Clear reports listener
             unsubscribePublicPostsListener = null; // New: Clear posts listener
 
-            console.log("JCHAT_DEBUG: All Firestore listeners detached on Admin page unload.");
+            console.log("Grazzy_DEBUG: All Firestore listeners detached on Admin page unload.");
         });
 
         // Listen for changes in local storage (e.g., theme changes from other tabs).

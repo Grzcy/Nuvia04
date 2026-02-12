@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JCHAT - Auto Approval Control</title>
+  <title>Grazzy - Auto Approval Control</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -72,8 +72,8 @@
   <header>
     <div class="header-inner">
       <a class="brand-link" href="/index.html" aria-label="Home">
-        <img class="brand-logo" src="assets/security.png" alt="JCHAT Security" onerror="this.style.display='none'">
-        <span class="brand-text">Nuvia</span>
+        <img class="brand-logo" src="assets/security.png" alt="Grazzy Security" onerror="this.style.display='none'">
+        <span class="brand-text">Grazzy</span>
       </a>
       <div class="header-actions">
         <button id="logoutButton" class="logout-btn" aria-label="Logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></button>
@@ -185,7 +185,7 @@
     const db = getFirestore(app);
     (async ()=>{
       try { await enableIndexedDbPersistence(db); }
-      catch (e) { console.warn('Nuvia_WARN: Approvals persistence disabled; continuing online-only.', e); }
+      catch (e) { console.warn('Grazzy_WARN: Approvals persistence disabled; continuing online-only.', e); }
     })();
 
     const ADMIN_UID = 'RJZ8xhsjEsdKBGFYveWO0Rsq1Zz1';

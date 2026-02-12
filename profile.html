@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - Profile</title>
+    <title>Grazzy - Profile</title>
     
     <!-- Security Meta Tags -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -12,9 +12,9 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="JCHAT - User Profile with levels, achievements, and customization">
-    <meta name="keywords" content="profile, user, levels, achievements, customization, JCHAT">
-    <meta name="author" content="JCHAT Team">
+    <meta name="description" content="Grazzy - User Profile with levels, achievements, and customization">
+    <meta name="keywords" content="profile, user, levels, achievements, customization, Grazzy">
+    <meta name="author" content="Grazzy Team">
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5124,7 +5124,7 @@
 </style>
 </head>
 <body class="theme-dark-mode">
-    <!-- JCHAT Pink & Blue Glowing Loader -->
+    <!-- Grazzy Pink & Blue Glowing Loader -->
     <div id="jchatLoader" class="jchat-loader">
         <div class="loader-container">
             <div class="loader-meter" aria-hidden="true"></div>
@@ -5138,7 +5138,7 @@
                 <div class="particle"></div>
                 <div class="particle"></div>
             </div>
-            <div class="loader-text">JCHAT</div>
+            <div class="loader-text">Grazzy</div>
             <div class="loader-subtext">
                 Loading your profile
                 <span class="loader-dots">
@@ -5175,7 +5175,7 @@
                     <i class="fas fa-arrow-left"></i>
                     <span>Home</span>
                 </a>
-                <a href="/index.html" class="logo"><span class="logo-name">Nuvia</span></a>
+                <a href="/index.html" class="logo"><span class="logo-name">Grazzy</span></a>
             </div>
             <nav>
                 <ul>
@@ -5888,12 +5888,12 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        // --- JCHAT Loader Management ---
+        // --- Grazzy Loader Management ---
         const jchatLoader = document.getElementById('jchatLoader');
         let loaderTimeout;
 
         const profileLoaderMessages = [
-            'Initializing JCHAT',
+            'Initializing Grazzy',
             'Connecting to servers',
             'Loading your profile',
             'Setting up features',
@@ -6390,10 +6390,10 @@
                 
                 // Play the notification sound
                 audio.play().catch(error => {
-                    console.log('JCHAT_DEBUG: Could not play notification sound:', error);
+                    console.log('Grazzy_DEBUG: Could not play notification sound:', error);
                 });
             } catch (error) {
-                console.log('JCHAT_DEBUG: Error playing notification sound:', error);
+                console.log('Grazzy_DEBUG: Error playing notification sound:', error);
             }
         }
         /**
@@ -6531,7 +6531,7 @@
                 const confirmNoBtn = document.getElementById('confirmNoBtn');       // Assuming this exists
 
                 if (!customConfirmModal || !confirmModalMessage) {
-                    console.error("JCHAT_ERROR: Custom confirmation modal base elements not found.");
+                    console.error("Grazzy_ERROR: Custom confirmation modal base elements not found.");
                     resolve(false);
                     return;
                 }
@@ -6678,8 +6678,8 @@
             }
 
             // Log completion details for debugging
-            console.log(`JCHAT_DEBUG: Profile completion: ${completionPercentage}% (${completedFields.length}/${completionFields.length} fields)`);
-            console.log('JCHAT_DEBUG: Completed fields:', completedFields);
+            console.log(`Grazzy_DEBUG: Profile completion: ${completionPercentage}% (${completedFields.length}/${completionFields.length} fields)`);
+            console.log('Grazzy_DEBUG: Completed fields:', completedFields);
             
             return completionPercentage;
         }
@@ -6751,19 +6751,19 @@
                         }, 'image/jpeg', quality);
                     };
                     img.onerror = (error) => {
-                        console.error("JCHAT_ERROR: Image element loading error during resize:", error);
+                        console.error("Grazzy_ERROR: Image element loading error during resize:", error);
                         reject(new Error(`Image loading failed: ${error.message || 'Unknown image loading error.'}`));
                     };
                     img.src = event.target.result;
                 };
                 reader.onerror = (error) => {
-                    console.error("JCHAT_ERROR: FileReader error during readAsDataURL:", error);
+                    console.error("Grazzy_ERROR: FileReader error during readAsDataURL:", error);
                     reject(new Error(`FileReader error: ${error.target.error ? error.target.error.message : 'Unknown error reading file.'}`));
                 }
                 try {
                     reader.readAsDataURL(file);
                 } catch (e) {
-                    console.error("JCHAT_ERROR: Error calling readAsDataURL:", e);
+                    console.error("Grazzy_ERROR: Error calling readAsDataURL:", e);
                     reject(new Error(`Failed to read file data: ${e.message}`));
                 }
             });
@@ -6799,14 +6799,14 @@
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error("JCHAT_ERROR: Cloudinary upload error:", errorData);
+                    console.error("Grazzy_ERROR: Cloudinary upload error:", errorData);
                     throw new Error(`Cloudinary upload failed: ${errorData.error.message || response.statusText}`);
                 }
 
                 const data = await response.json();
                 return data.secure_url; // Return the secure URL
             } catch (error) {
-                console.error("JCHAT_ERROR: Error uploading to Cloudinary:", error);
+                console.error("Grazzy_ERROR: Error uploading to Cloudinary:", error);
                 return null;
             }
         }
@@ -6829,10 +6829,10 @@
                         batch.update(postRef, { profilePhoto: newProfilePicUrl });
                     });
                     await batch.commit();
-                    console.log(`JCHAT_DEBUG: Updated profile picture for ${querySnapshot.size} posts by user ${userId}.`);
+                    console.log(`Grazzy_DEBUG: Updated profile picture for ${querySnapshot.size} posts by user ${userId}.`);
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error updating posts with new profile picture:", error);
+                console.error("Grazzy_ERROR: Error updating posts with new profile picture:", error);
                 // Not showing message box here as it's a background task after main profile update
             }
         }
@@ -6888,7 +6888,7 @@
                 await updateProfile(currentUser, {
                     photoURL: newProfilePicUrl
                 });
-                console.log("JCHAT_DEBUG: Firebase Auth photoURL updated.");
+                console.log("Grazzy_DEBUG: Firebase Auth photoURL updated.");
 
                 // 4. Update Firestore private profile
                 const privateProfileDocRef = doc(db, "artifacts", appId, "users", currentUser.uid, "profiles", "user_profile");
@@ -6896,7 +6896,7 @@
                     profilePicId: newProfilePicUrl, // Store the full URL
                     updatedAt: serverTimestamp()
                 });
-                console.log("JCHAT_DEBUG: Firestore private profilePicId updated.");
+                console.log("Grazzy_DEBUG: Firestore private profilePicId updated.");
 
                 // 5. Update Firestore public profile
                 const publicProfileDocRef = doc(db, "artifacts", appId, "public", "data", "users", currentUser.uid);
@@ -6904,7 +6904,7 @@
                     profilePicId: newProfilePicUrl, // Store the full URL
                     updatedAt: serverTimestamp()
                 });
-                console.log("JCHAT_DEBUG: Firestore public profilePicId updated.");
+                console.log("Grazzy_DEBUG: Firestore public profilePicId updated.");
 
                 // 6. Update profile pictures in user's posts (background task)
                 updatePostsWithNewProfilePic(currentUser.uid, newProfilePicUrl);
@@ -6927,7 +6927,7 @@
 
             }
             catch (error) {
-                console.error("JCHAT_ERROR: Error updating profile picture:", error);
+                console.error("Grazzy_ERROR: Error updating profile picture:", error);
                 console.error(`Failed to update profile picture: ${error.message}`);
             }
             finally {
@@ -6949,7 +6949,7 @@
                     window.location.href = '/login.html'; // Redirect to login page
                 }, 1000);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error logging out:", error);
+                console.error("Grazzy_ERROR: Error logging out:", error);
                 console.error("Failed to log out. Please try again.");
             }
         }
@@ -6985,7 +6985,7 @@
                     await updateProfile(currentUser, {
                         displayName: newDisplayName
                     });
-                    console.log("JCHAT_DEBUG: Firebase Auth displayName updated.");
+                    console.log("Grazzy_DEBUG: Firebase Auth displayName updated.");
                 }
 
                 // Update Firestore private profile
@@ -7001,7 +7001,7 @@
                     socialLinks: newSocialLinks, // NEW
                     updatedAt: serverTimestamp()
                 });
-                console.log("JCHAT_DEBUG: Firestore private profile updated.");
+                console.log("Grazzy_DEBUG: Firestore private profile updated.");
 
                 // Update Firestore public profile
                 const publicProfileDocRef = doc(db, "artifacts", appId, "public", "data", "users", currentUser.uid);
@@ -7016,7 +7016,7 @@
                     socialLinks: newSocialLinks, // NEW
                     updatedAt: serverTimestamp()
                 });
-                console.log("JCHAT_DEBUG: Firestore public profile updated.");
+                console.log("Grazzy_DEBUG: Firestore public profile updated.");
 
                 // Update header UI immediately
                 if (headerDisplayName) headerDisplayName.textContent = newDisplayName; // Null check
@@ -7047,7 +7047,7 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving profile changes:", error);
+                console.error("Grazzy_ERROR: Error saving profile changes:", error);
                 console.error(`Failed to save profile: ${error.message}`);
             } finally {
                 // Profile save complete
@@ -7080,7 +7080,7 @@
                 }, 2000);
                 
             } catch (error) {
-                console.error("JCHAT_ERROR: Failed to copy User ID:", error);
+                console.error("Grazzy_ERROR: Failed to copy User ID:", error);
                 
                 // Fallback for older browsers
                 try {
@@ -7093,7 +7093,7 @@
                     
                     showEnhancedSmartSuccess("User ID copied to clipboard! 📋", 'achievement');
                 } catch (fallbackError) {
-                    console.error("JCHAT_ERROR: Fallback copy failed:", fallbackError);
+                    console.error("Grazzy_ERROR: Fallback copy failed:", fallbackError);
                     console.error("Failed to copy User ID. Please select and copy manually.");
                 }
             }
@@ -7471,11 +7471,11 @@
                 // Reauthenticate user first
                 const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
                 await reauthenticateWithCredential(currentUser, credential);
-                console.log("JCHAT_DEBUG: User reauthenticated successfully.");
+                console.log("Grazzy_DEBUG: User reauthenticated successfully.");
 
                 // Update email
                 await updateEmail(currentUser, newEmail);
-                console.log("JCHAT_DEBUG: Firebase Auth email updated.");
+                console.log("Grazzy_DEBUG: Firebase Auth email updated.");
 
                 // Update Firestore private profile
                 const privateProfileDocRef = doc(db, "artifacts", appId, "users", currentUser.uid, "profiles", "user_profile");
@@ -7483,7 +7483,7 @@
                     email: newEmail,
                     updatedAt: serverTimestamp()
                 });
-                console.log("JCHAT_DEBUG: Firestore private email updated.");
+                console.log("Grazzy_DEBUG: Firestore private email updated.");
 
                 showEnhancedSmartSuccess("Email updated successfully! Please verify your new email.", 'update');
                 if (profileEmailInput) profileEmailInput.value = newEmail; // Update displayed email, null check
@@ -7497,7 +7497,7 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error updating email:", error);
+                console.error("Grazzy_ERROR: Error updating email:", error);
                 let errorMessage = "Failed to update email. Please check your current password.";
                 if (error.code === 'auth/wrong-password') {
                     errorMessage = "Incorrect current password.";
@@ -7548,11 +7548,11 @@
                 // Reauthenticate user first
                 const credential = EmailAuthProvider.credential(currentUser.email, oldPassword);
                 await reauthenticateWithCredential(currentUser, credential);
-                console.log("JCHAT_DEBUG: User reauthenticated successfully.");
+                console.log("Grazzy_DEBUG: User reauthenticated successfully.");
 
                 // Update password
                 await updatePassword(currentUser, newPassword);
-                console.log("JCHAT_DEBUG: Firebase Auth password updated.");
+                console.log("Grazzy_DEBUG: Firebase Auth password updated.");
 
                 showEnhancedSmartSuccess("Password updated successfully!", 'update');
                 if (oldPasswordInput) oldPasswordInput.value = ''; // Null check
@@ -7560,7 +7560,7 @@
                 if (confirmNewPasswordInput) confirmNewPasswordInput.value = ''; // Null check
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error updating password:", error);
+                console.error("Grazzy_ERROR: Error updating password:", error);
                 let errorMessage = "Failed to update password. Please check your old password.";
                 if (error.code === 'auth/wrong-password') {
                     errorMessage = "Incorrect old password.";
@@ -7661,7 +7661,7 @@
             } else if (level >= 101 && level <= 250) { // Tier 3: Dedicated User (Levels 101 - 250)
                 jCoinReward = 750 + (level - 101) * 12;
                 gasReward = 150 + (level - 101) * 5;
-                const tierNames = ["Dedicated User", "JCHAT Elite", "Master Communicator", "Community Architect"];
+                const tierNames = ["Dedicated User", "Grazzy Elite", "Master Communicator", "Community Architect"];
                 const tierIcons = ["fas fa-user-shield", "fas fa-gem", "fas fa-microphone-alt", "fas fa-sitemap"];
                 const tierIndex = Math.floor((level - 101) / 37); // Cycle every ~37 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -7673,23 +7673,23 @@
                 if (level === 125) otherRewards.push("Title: 'Rising Star'", "Unlock: Custom Chat Font (Style 1)");
                 if (level === 130) otherRewards.push("Unlock: 7-Day XP Boost");
                 if (level === 140) otherRewards.push("Permanent: 3% JCoin Shop Discount");
-                if (level === 150) otherRewards.push("Badge: 'JCHAT Expert'", "Unlock: Premium Profile Theme (Animated 1)");
+                if (level === 150) otherRewards.push("Badge: 'Grazzy Expert'", "Unlock: Premium Profile Theme (Animated 1)");
                 if (level === 160) otherRewards.push("Increased Group Member Capacity (+5)");
                 if (level === 170) otherRewards.push("Unlock: Animated Emote Pack (Set 2)");
                 if (level === 175) otherRewards.push("Title: 'Elite Communicator'", "Unlock: Custom Chat Font (Style 2)");
                 if (level === 180) otherRewards.push("Increased Message Character Limit (+25)");
                 if (level === 190) otherRewards.push("Permanent: 4% JCoin Shop Discount");
-                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'JCHAT Champion'", "Unlock: Exclusive 'Diamond' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
+                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'Grazzy Champion'", "Unlock: Exclusive 'Diamond' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
                 if (level === 210) otherRewards.push("Increased Media Upload Size (+10MB)");
                 if (level === 220) otherRewards.push("Unlock: Premium Profile Theme (Animated 2)");
                 if (level === 230) otherRewards.push("Unlock: Rare Emote Pack (Set 2)");
                 if (level === 240) otherRewards.push("Priority Support Access");
                 if (level === 250) otherRewards.push("Badge: 'Quarter-Millennium'", "Title: 'The Architect'", "Early Access: Next Major Feature Beta");
 
-            } else if (level >= 251 && level <= 400) { // Tier 4: JCHAT Legend (Levels 251 - 400)
+            } else if (level >= 251 && level <= 400) { // Tier 4: Grazzy Legend (Levels 251 - 400)
                 jCoinReward = 2500 + (level - 251) * 20;
                 gasReward = 500 + (level - 251) * 10;
-                const tierNames = ["JCHAT Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
+                const tierNames = ["Grazzy Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
                 const tierIcons = ["fas fa-star-half-alt", "fas fa-chess-king", "fas fa-galaxy", "fas fa-infinity"];
                 const tierIndex = Math.floor((level - 251) / 37); // Cycle every ~37 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -7699,11 +7699,11 @@
                 if (level === 260) otherRewards.push("Permanent: 5% JCoin Shop Discount");
                 if (level === 275) otherRewards.push("Title: 'Grand Strategist'", "Unlock: Legendary Emote Pack (Set 1)");
                 if (level === 290) otherRewards.push("Increased Group Creation Limit (+2)");
-                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'JCHAT Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
+                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'Grazzy Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
                 if (level === 310) otherRewards.push("Increased Media Upload Size (+15MB)");
                 if (level === 325) otherRewards.push("Title: 'Cosmic Weaver'", "Unlock: Custom Chat Font (Style 3)");
                 if (level === 340) otherRewards.push("Permanent: 7% JCoin Shop Discount");
-                if (level === 350) otherRewards.push("Badge: 'JCHAT Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
+                if (level === 350) otherRewards.push("Badge: 'Grazzy Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
                 if (level === 360) otherRewards.push("Increased Group Member Capacity (+10)");
                 if (level === 375) otherRewards.push("Title: 'The Eternal Flame'", "Unlock: Legendary Emote Pack (Set 2)");
                 if (level === 390) otherRewards.push("Ad-Free Experience (1 Month)");
@@ -7712,7 +7712,7 @@
             } else if (level >= 401 && level <= 500) { // Tier 5: The Unrivaled (Levels 401 - 500)
                 jCoinReward = 5000 + (level - 401) * 30;
                 gasReward = 1000 + (level - 401) * 15;
-                const tierNames = ["The Unrivaled", "Cosmic Creator", "JCHAT Deity", "Apex Being"];
+                const tierNames = ["The Unrivaled", "Cosmic Creator", "Grazzy Deity", "Apex Being"];
                 const tierIcons = ["fas fa-infinity", "fas fa-solar-system", "fas fa-hand-holding-heart", "fas fa-star-and-crescent"];
                 const tierIndex = Math.floor((level - 401) / 25); // Cycle every 25 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -7729,11 +7729,11 @@
                 if (level === 490) otherRewards.push("Unlock: Exclusive 'Cosmic' Animated Avatar Frame");
                 if (level === 500) {
                     otherRewards.push(
-                        "Badge: 'JCHAT Deity'",
+                        "Badge: 'Grazzy Deity'",
                         "Title: 'The Absolute'",
                         "Lifetime Premium Status (Ad-Free, All Cosmetics Unlocked)",
                         "Personalized Group Creation Perk (Custom starting benefits for new groups)",
-                        "Acknowledgment on JCHAT Hall of Fame (Your name/ID listed on a special page)",
+                        "Acknowledgment on Grazzy Hall of Fame (Your name/ID listed on a special page)",
                         "Exclusive Discord Role (if applicable)",
                         "Voting Rights on Future Feature Development"
                     );
@@ -7829,10 +7829,10 @@
                     if (levelInfo.otherRewards.length > 0) {
                         levelsGainedMessages[levelsGainedMessages.length - 1] += ` Unlocked: ${levelInfo.otherRewards.join(', ')}.`;
                     }
-                    console.log(`JCHAT_DEBUG: User ${userId} leveled up to ${currentLevel}.`);
+                    console.log(`Grazzy_DEBUG: User ${userId} leveled up to ${currentLevel}.`);
 
                 } catch (transactionError) {
-                    console.error("JCHAT_ERROR: Transaction failed during level-up:", transactionError);
+                    console.error("Grazzy_ERROR: Transaction failed during level-up:", transactionError);
                     console.error(`Failed to apply level-up rewards for Level ${currentLevel}: ${transactionError.message}`);
                     break; // Stop processing further levels if a transaction fails
                 }
@@ -7862,7 +7862,7 @@
                     profileData = privateDocSnap.data();
                     // Fix for createdAt if it's missing or malformed (not a Timestamp)
                     if (!profileData.createdAt || typeof profileData.createdAt.toDate !== 'function') {
-                        console.warn("JCHAT_WARN: Private user_profile createdAt is missing or malformed. Attempting to fix.");
+                        console.warn("Grazzy_WARN: Private user_profile createdAt is missing or malformed. Attempting to fix.");
                         await updateDoc(privateProfileDocRef, { createdAt: serverTimestamp() });
                         // Re-fetch to get the correct Timestamp object
                         const updatedSnap = await getDoc(privateProfileDocRef);
@@ -7870,30 +7870,30 @@
                     }
                     // Ensure 'gas' field exists, initialize if not
                     if (profileData.gas === undefined) {
-                        console.log("JCHAT_DEBUG: 'gas' field missing in profile, initializing to 0.");
+                        console.log("Grazzy_DEBUG: 'gas' field missing in profile, initializing to 0.");
                         await updateDoc(privateProfileDocRef, { gas: 0 });
                         profileData.gas = 0;
                     }
                     // Ensure 'totalGasEarned' field exists, initialize if not
                     if (profileData.totalGasEarned === undefined) {
-                        console.log("JCHAT_DEBUG: 'totalGasEarned' field missing in profile, initializing to 0.");
+                        console.log("Grazzy_DEBUG: 'totalGasEarned' field missing in profile, initializing to 0.");
                         await updateDoc(privateProfileDocRef, { totalGasEarned: 0 });
                         profileData.totalGasEarned = 0;
                     }
                     // Ensure 'level' field exists, initialize if not
                     if (profileData.level === undefined) {
-                        console.log("JCHAT_DEBUG: 'level' field missing in profile, initializing to 1.");
+                        console.log("Grazzy_DEBUG: 'level' field missing in profile, initializing to 1.");
                         await updateDoc(privateProfileDocRef, { level: 1 });
                         profileData.level = 1;
                     }
                     
                     if (profileData.unlockedBenefits === undefined) { // NEW: Initialize unlockedBenefits
-                        console.log("JCHAT_DEBUG: 'unlockedBenefits' field missing in profile, initializing to [].");
+                        console.log("Grazzy_DEBUG: 'unlockedBenefits' field missing in profile, initializing to [].");
                         await updateDoc(privateProfileDocRef, { unlockedBenefits: [] });
                         profileData.unlockedBenefits = [];
                     }
                     if (profileData.lastDailyBonusClaimDate === undefined) { // NEW: Initialize lastDailyBonusClaimDate
-                        console.log("JCHAT_DEBUG: 'lastDailyBonusClaimDate' missing, initializing to null.");
+                        console.log("Grazzy_DEBUG: 'lastDailyBonusClaimDate' missing, initializing to null.");
                         await updateDoc(privateProfileDocRef, { lastDailyBonusClaimDate: null });
                         profileData.lastDailyBonusClaimDate = null;
                     }
@@ -7907,7 +7907,7 @@
                     if (profileData.chatBubbleStyle === undefined) { await updateDoc(privateProfileDocRef, { chatBubbleStyle: "default" }); profileData.chatBubbleStyle = "default"; } // NEW
                     if (profileData.profileTheme === undefined) { await updateDoc(privateProfileDocRef, { profileTheme: "default" }); profileData.profileTheme = "default"; } // NEW
 
-                    console.log("JCHAT_DEBUG: Fetched existing profile data for header:", profileData);
+                    console.log("Grazzy_DEBUG: Fetched existing profile data for header:", profileData);
                 } else {
                     // If private profile doesn't exist, create a basic one
                     profileData = {
@@ -7945,7 +7945,7 @@
                         profileTheme: "default", // NEW
                     };
                     await setDoc(privateProfileDocRef, profileData);
-                    console.log("JCHAT_DEBUG: Created new profile data for header:", profileData);
+                    console.log("Grazzy_DEBUG: Created new profile data for header:", profileData);
 
                     // Also create/update public profile
                     await setDoc(publicProfileDocRef, {
@@ -7976,7 +7976,7 @@
                 // Update header UI
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 try{ renderVerifiedBadge(headerDisplayName, !!profileData.verified, 'sm'); }catch(_){}
                 if (headerNavLinkProfile) headerNavLinkProfile.href = `/Profile.html?userId=${user.uid}`; // Ensure header nav link is correct, null check
 
@@ -7990,10 +7990,10 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                if (headerDisplayName) headerDisplayName.textContent = user.displayName || "JCHAT User"; // Null check
+                if (headerDisplayName) headerDisplayName.textContent = user.displayName || "Grazzy User"; // Null check
                 console.error(`Error loading header profile: ${error.message}`);
             }
         }
@@ -8019,7 +8019,7 @@
                     }
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching notification count:", error);
+                console.error("Grazzy_ERROR: Error fetching notification count:", error);
                 if (notificationCountElement) notificationCountElement.style.display = 'none'; // Null check
             }
         }
@@ -8035,16 +8035,16 @@
                 const docSnap = await getDoc(systemSettingsDocRef);
                 if (docSnap.exists()) {
                     currentSystemSettings = docSnap.data();
-                    console.log("JCHAT_DEBUG: System settings fetched:", currentSystemSettings);
+                    console.log("Grazzy_DEBUG: System settings fetched:", currentSystemSettings);
                 } else {
-                    console.warn("JCHAT_WARNING: System settings document not found. Using default values.");
+                    console.warn("Grazzy_WARNING: System settings document not found. Using default values.");
                     currentSystemSettings = {
                         jcoinNairaRate: 7.5, // Default if not found
                         dailyBonusAmount: 50 // Default if not found
                     };
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching system settings:", error);
+                console.error("Grazzy_ERROR: Error fetching system settings:", error);
                 console.error("Failed to load system settings.");
             }
         }
@@ -8138,7 +8138,7 @@
                 showEnhancedSmartSuccess("JCoin request submitted successfully! An admin will review it shortly.", 'achievement');
                 hideJCoinRequestModal(); // Close modal on success
             } catch (error) {
-                console.error("JCHAT_ERROR: Error submitting JCoin request:", error);
+                console.error("Grazzy_ERROR: Error submitting JCoin request:", error);
                 console.error(`Failed to submit request: ${error.message}`);
             } finally {
                 // JCoin request complete
@@ -8178,9 +8178,9 @@
                     activityId: activityId
                 });
 
-                console.log(`JCHAT_DEBUG: Pending activity reward created with ID: ${newRewardDocRef.id}`);
+                console.log(`Grazzy_DEBUG: Pending activity reward created with ID: ${newRewardDocRef.id}`);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error creating pending activity reward:", error);
+                console.error("Grazzy_ERROR: Error creating pending activity reward:", error);
             }
         }
         /**
@@ -8258,7 +8258,7 @@
                 currentUserProfileData.lastDailyBonusClaimDate = Timestamp.fromDate(new Date());
                 updateDailyBonusUI(); // Update button and countdown
             } catch (error) {
-                console.error("JCHAT_ERROR: Error claiming daily bonus:", error);
+                console.error("Grazzy_ERROR: Error claiming daily bonus:", error);
                 console.error(`Failed to claim bonus: ${error.message}`);
                 playNotificationSound('error');
             } finally {
@@ -8386,7 +8386,7 @@
                 showEnhancedSmartSuccess("Report submitted successfully! Thank you for helping us maintain a safe community.", 'achievement');
                 hideReportUserModal();
             } catch (error) {
-                console.error("JCHAT_ERROR: Error submitting report:", error);
+                console.error("Grazzy_ERROR: Error submitting report:", error);
                 console.error(`Failed to submit report: ${error.message}`);
             } finally {
                 // Report submission complete
@@ -8535,7 +8535,7 @@
                 updateFriendsButtonCount(friendsData.length);
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching friends for modal:", error);
+                console.error("Grazzy_ERROR: Error fetching friends for modal:", error);
                 loadingElement.style.display = 'none';
                 noFriendsElement.style.display = 'block';
                 noFriendsElement.textContent = 'Failed to load friends. Please try again.';
@@ -8597,7 +8597,7 @@
                     const friendId = friend.id;
                     const friendName = friend.username;
                     
-                    console.log(`JCHAT_DEBUG: Starting chat with friend ${friendId} (${friendName})`);
+                    console.log(`Grazzy_DEBUG: Starting chat with friend ${friendId} (${friendName})`);
                     
                     // Close modal
                     selectFriendModal.classList.remove('active');
@@ -8674,7 +8674,7 @@
         function setupOnlineStatusTracking() {
             if (!isAuthReady || !currentUser) return;
 
-            console.log("JCHAT_DEBUG: Setting up online status tracking...");
+            console.log("Grazzy_DEBUG: Setting up online status tracking...");
 
             // Listen to public users collection for real-time updates
             const publicUsersRef = collection(db, "artifacts", appId, "public", "data", "users");
@@ -8701,7 +8701,7 @@
                     }
                 });
             }, (error) => {
-                console.error("JCHAT_ERROR: Error setting up online status tracking:", error);
+                console.error("Grazzy_ERROR: Error setting up online status tracking:", error);
             });
         }
 
@@ -8751,7 +8751,7 @@
                 updateFriendsButtonCount(currentUserFriends.size);
                 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching friend count:", error);
+                console.error("Grazzy_ERROR: Error fetching friend count:", error);
                 // Keep count as 0 if there's an error
                 updateFriendsButtonCount(0);
             }
@@ -8865,7 +8865,7 @@
                     // Calculate and update profile completion immediately after loading data
                     calculateAndUpdateProfileCompletion(displayedUserProfileData);
 
-                    console.log(`JCHAT_DEBUG: Fetched profile data for ${userIdToDisplay}:`, displayedUserProfileData);
+                    console.log(`Grazzy_DEBUG: Fetched profile data for ${userIdToDisplay}:`, displayedUserProfileData);
 
                     // Apply visibility settings if it's another user's profile
                     const visibility = displayedUserProfileData.visibility || {};
@@ -8883,7 +8883,7 @@
                         editCoverOverlay.tabIndex = 0;
                     }
 
-                    if (profileUsername) profileUsername.textContent = displayedUserProfileData.username || "JCHAT User"; // Null check
+                    if (profileUsername) profileUsername.textContent = displayedUserProfileData.username || "Grazzy User"; // Null check
                     try{ renderVerifiedBadge(profileUsername, !!displayedUserProfileData.verified, 'md'); }catch(_){}
                     const usernameInitial = (displayedUserProfileData.username || "J").charAt(0).toUpperCase();
 
@@ -9382,7 +9382,7 @@
 
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching user profile:", error);
+                console.error("Grazzy_ERROR: Error fetching user profile:", error);
                 if (profileUsername) profileUsername.textContent = "Error Loading Profile"; // Null check
                 if (profileBio) profileBio.textContent = "An error occurred while loading this profile."; // Null check
                 console.error(`Failed to load profile: ${error.message}`);
@@ -9430,7 +9430,7 @@
                 if (user) {
                     currentUser = user;
                     isAuthReady = true; // Set auth ready flag
-                    console.log("JCHAT_DEBUG: User authenticated in Profile Page:", user.uid);
+                    console.log("Grazzy_DEBUG: User authenticated in Profile Page:", user.uid);
                     
                     // Fetch system settings first as they are needed by profile display functions
                     await fetchSystemSettings();
@@ -9459,18 +9459,18 @@
                     hideLoader();
 
                 } else {
-                console.log("JCHAT_DEBUG: No user signed in.");
+                console.log("Grazzy_DEBUG: No user signed in.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                     // onAuthStateChanged will be triggered again with the new user
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';
                     }
@@ -9520,13 +9520,13 @@
                 hideLoader();
             }
         } catch (error) {
-            console.error("JCHAT_ERROR: Error in authentication flow:", error);
+            console.error("Grazzy_ERROR: Error in authentication flow:", error);
             console.error(`Authentication error: ${error.message}`);
             // Hide loader on error
             hideLoader();
         } finally {
             // Always ensure loader is hidden after authentication flow
-            console.log("JCHAT_DEBUG: Authentication flow complete");
+            console.log("Grazzy_DEBUG: Authentication flow complete");
         }
         });
         // --- Scroll Toggle Button Functionality ---
@@ -9979,7 +9979,7 @@
             if (closeFriendModalBtn) {
                 closeFriendModalBtn.addEventListener('click', () => {
                     selectFriendModal.classList.remove('active');
-                    console.log('JCHAT_DEBUG: Modal closed via close button');
+                    console.log('Grazzy_DEBUG: Modal closed via close button');
                 });
             }
 
@@ -9988,7 +9988,7 @@
                 selectFriendModal.addEventListener('click', (e) => {
                     if (e.target.id === 'selectFriendModal') {
                         e.target.classList.remove('active');
-                        console.log('JCHAT_DEBUG: Modal closed via outside click');
+                        console.log('Grazzy_DEBUG: Modal closed via outside click');
                     }
                 });
             }
@@ -9998,7 +9998,7 @@
                 if (e.key === 'Escape') {
                     if (selectFriendModal && selectFriendModal.classList.contains('active')) {
                         selectFriendModal.classList.remove('active');
-                        console.log('JCHAT_DEBUG: Modal closed via Escape key');
+                        console.log('Grazzy_DEBUG: Modal closed via Escape key');
                     }
                 }
             });

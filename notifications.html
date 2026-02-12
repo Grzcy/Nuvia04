@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nuvia — Notifications (Social Feed)</title>
+  <title>Grazzy — Notifications (Social Feed)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -104,7 +104,7 @@
 <body>
   <header>
     <div class="header-wrap">
-      <a class="logo" href="/">Nuvia</a>
+      <a class="logo" href="/">Grazzy</a>
       <div class="toolbar-actions">
         <button class="btn" id="backBtn" aria-label="Go back"><i class="fa-solid fa-arrow-left"></i></button>
         <button class="btn" id="openPrefs" aria-haspopup="true" aria-expanded="false" aria-controls="prefsPopover" title="Notification preferences"><i class="fa-solid fa-bell-slash"></i></button>
@@ -191,7 +191,7 @@
             try { await Notification.requestPermission(); } catch(_){}
           }
           if (Notification.permission !== 'granted') {
-            console.warn('Nuvia: Notifications permission not granted');
+            console.warn('Grazzy: Notifications permission not granted');
             return;
           }
 
@@ -203,7 +203,7 @@
           try {
             fcmToken = await getToken(messaging, { serviceWorkerRegistration: swReg, vapidKey: vapidKey || undefined });
           } catch (e) {
-            console.warn('Nuvia: getToken failed', e);
+            console.warn('Grazzy: getToken failed', e);
           }
 
           if (fcmToken) {
@@ -212,14 +212,14 @@
                 const tokenRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'fcmTokens', fcmToken);
                 await setDoc(tokenRef, { token: fcmToken, ts: serverTimestamp(), userAgent: navigator.userAgent });
               }
-            } catch (e) { console.warn('Nuvia: Failed saving FCM token', e); }
+            } catch (e) { console.warn('Grazzy: Failed saving FCM token', e); }
           }
 
           // Handle incoming foreground messages
           try{
             onMessage(messaging, (payload)=>{
               try{
-                const title = (payload && (payload.notification && payload.notification.title)) || (payload && payload.data && payload.data.title) || 'Nuvia Notification';
+                const title = (payload && (payload.notification && payload.notification.title)) || (payload && payload.data && payload.data.title) || 'Grazzy Notification';
                 const body = (payload && (payload.notification && payload.notification.body)) || (payload && payload.data && payload.data.body) || '';
                 // Show a native notification if permitted
                 try{ new Notification(title, { body }); } catch(e){ /* fallback to in-app toast */ notify(body,'info'); }
@@ -227,9 +227,9 @@
             });
           }catch(e){ /* ignore */ }
 
-        }catch(e){ console.error('Nuvia: FCM init error', e); }
+        }catch(e){ console.error('Grazzy: FCM init error', e); }
       };
-    }).catch(e=>{ console.warn('Nuvia: Failed to load firebase-messaging.js', e); });
+    }).catch(e=>{ console.warn('Grazzy: Failed to load firebase-messaging.js', e); });
 
     (function(){
       const feedEl = document.getElementById('feed');
@@ -488,7 +488,7 @@
         try{
           const publicRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid);
           const pubSnap = await getDoc(publicRef);
-          let username = user.displayName || 'Nuvia User';
+          let username = user.displayName || 'Grazzy User';
           let picId = user.photoURL || null;
           if (pubSnap.exists()){
             const d = pubSnap.data();
@@ -502,7 +502,7 @@
         }catch(e){
           const initial = (user.displayName || 'N').charAt(0).toUpperCase();
           if (headerProfilePic && headerAvatarIcon) displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, initial, 'w_70,h_70,c_fill,g_face,r_max');
-          if (headerDisplayName) headerDisplayName.textContent = user.displayName || 'Nuvia User';
+          if (headerDisplayName) headerDisplayName.textContent = user.displayName || 'Grazzy User';
         }
       }
 

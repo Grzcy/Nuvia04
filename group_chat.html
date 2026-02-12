@@ -1104,7 +1104,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <a href="/index.html" class="logo">
-                <span>Nuvia</span>
+                <span>Grazzy</span>
             </a>
             <!-- Removed Header Navigation (Home, Profile) -->
             <div class="user-profile-header">
@@ -1152,7 +1152,7 @@
     <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
     <aside id="sidebarNav" class="sidebar-hidden" role="navigation" aria-label="Main Navigation">
       <div class="sidebar-header">
-        <span class="sidebar-title">Nuvia Menu</span>
+        <span class="sidebar-title">Grazzy Menu</span>
         <button id="sidebarCloseBtn" aria-label="Close Menu"><i class="fas fa-times"></i></button>
       </div>
       <div class="sidebar-links">
@@ -1312,7 +1312,7 @@
          */
         async function playNotificationSound() {
             if (!soundEnabled) {
-                console.log("JCHAT_DEBUG: Notification sound is disabled.");
+                console.log("Grazzy_DEBUG: Notification sound is disabled.");
                 return;
             }
             try {
@@ -1323,7 +1323,7 @@
                 synth.triggerAttackRelease("E5", "8n", Tone.now() + 0.1); // Play an E5 note slightly after E5
                 synth.triggerAttackRelease("G5", "8n", Tone.now() + 0.2); // Play a G5 note slightly after G5
             } catch (error) {
-                console.warn("JCHAT_WARN: Failed to play success tone:", error);
+                console.warn("Grazzy_WARN: Failed to play success tone:", error);
             }
         }
 
@@ -1463,7 +1463,7 @@
 
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayPicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 headerNavLinkProfile.href = `/profile.html?userId=${user.uid}`;
 
                 // Update JCoin and Gas display
@@ -1540,9 +1540,9 @@
             const urlParams = new URLSearchParams(window.location.search);
             groupId = urlParams.get('groupId');
 
-            console.log("JCHAT_DEBUG: Attempting to load group data.");
-            console.log("JCHAT_DEBUG: Group ID from URL:", groupId);
-            console.log("JCHAT_DEBUG: Current User UID:", currentUser ? currentUser.uid : "Not authenticated");
+            console.log("Grazzy_DEBUG: Attempting to load group data.");
+            console.log("Grazzy_DEBUG: Group ID from URL:", groupId);
+            console.log("Grazzy_DEBUG: Current User UID:", currentUser ? currentUser.uid : "Not authenticated");
 
             if (!groupId) {
                 groupNameHeader.textContent = "Error: Group ID missing.";
@@ -1554,7 +1554,7 @@
             }
 
             if (!currentUser) {
-                console.error("JCHAT_ERROR: loadGroupData called before currentUser is set.");
+                console.error("Grazzy_ERROR: loadGroupData called before currentUser is set.");
                 groupNameHeader.textContent = "Error: User not authenticated.";
                 showMessageBox("You must be logged in to access group chat.", 'error', 5000, true);
                 messageInput.disabled = true;
@@ -1573,13 +1573,13 @@
                     messageInput.disabled = true;
                     sendMessageButton.disabled = true;
                     attachMediaButton.disabled = true;
-                    console.error("JCHAT_ERROR: Group document does not exist for ID:", groupId);
+                    console.error("Grazzy_ERROR: Group document does not exist for ID:", groupId);
                     return;
                 }
 
                 groupData = groupDoc.data();
                 groupNameHeader.textContent = groupData.name || "Unnamed Group";
-                console.log("JCHAT_DEBUG: Group data loaded:", groupData);
+                console.log("Grazzy_DEBUG: Group data loaded:", groupData);
 
                 // Show/hide closeGroupBtn for owner
                 if (closeGroupBtn) {
@@ -1616,11 +1616,11 @@
                     messageInput.disabled = true;
                     sendMessageButton.disabled = true;
                     attachMediaButton.disabled = true;
-                    console.error(`JCHAT_ERROR: User ${currentUser.uid} is not a member of group ${groupId}. Members:`, groupData.members);
+                    console.error(`Grazzy_ERROR: User ${currentUser.uid} is not a member of group ${groupId}. Members:`, groupData.members);
                     return;
                 }
 
-                console.log(`JCHAT_DEBUG: User ${currentUser.uid} is a member of group ${groupId}.`);
+                console.log(`Grazzy_DEBUG: User ${currentUser.uid} is a member of group ${groupId}.`);
                 // If member, enable chat and start listening for messages
                 messageInput.disabled = false;
                 sendMessageButton.disabled = false;
@@ -1628,7 +1628,7 @@
                 listenForChatMessages();
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error loading group data or checking membership:", error);
+                console.error("Grazzy_ERROR: Error loading group data or checking membership:", error);
                 groupNameHeader.textContent = "Error loading group.";
                 showMessageBox(`Error loading group chat: ${error.message}`, 'error', 5000, true);
                 messageInput.disabled = true;
@@ -1645,17 +1645,17 @@
                 unsubscribeChatListener(); // Unsubscribe from previous listener if any
             }
 
-            console.log(`JCHAT_DEBUG: Starting listener for messages in group: ${groupId}`);
+            console.log(`Grazzy_DEBUG: Starting listener for messages in group: ${groupId}`);
             const chatCollectionRef = collection(db, "artifacts", appId, "public", "data", "groups", groupId, "messages");
             const q = query(chatCollectionRef, orderBy("timestamp", "asc"));
 
             unsubscribeChatListener = onSnapshot(q, (snapshot) => {
-                console.log("JCHAT_DEBUG: onSnapshot received update. Number of documents:", snapshot.docs.length);
+                console.log("Grazzy_DEBUG: onSnapshot received update. Number of documents:", snapshot.docs.length);
                 chatMessages.innerHTML = ''; // Clear existing messages
-                console.log("JCHAT_DEBUG: chatMessages cleared.");
+                console.log("Grazzy_DEBUG: chatMessages cleared.");
                 if (snapshot.empty) {
                     chatMessages.innerHTML = '<p class="messages-loading-text">No messages yet. Be the first to say hi!</p>';
-                    console.log("JCHAT_DEBUG: No messages found in snapshot.");
+                    console.log("Grazzy_DEBUG: No messages found in snapshot.");
                 } else {
                     snapshot.docs.forEach(doc => {
                         const message = { id: doc.id, ...doc.data() }; // Include doc.id for editing/deleting
@@ -1676,7 +1676,7 @@
          * @param {object} message - The message object from Firestore.
          */
         function displayMessage(message) {
-            console.log("JCHAT_DEBUG: Attempting to display message:", message);
+            console.log("Grazzy_DEBUG: Attempting to display message:", message);
             const messageItem = document.createElement('div');
             messageItem.classList.add('message-item');
             messageItem.dataset.messageId = message.id; // Store message ID on element
@@ -1720,7 +1720,7 @@
                 </div>
             `;
             chatMessages.appendChild(messageItem);
-            console.log("JCHAT_DEBUG: Message appended to chatMessages:", message.id);
+            console.log("Grazzy_DEBUG: Message appended to chatMessages:", message.id);
 
             // Add event listeners for edit buttons
             if (isSentByCurrentUser) {
@@ -1773,7 +1773,7 @@
 
             if (!currentUser || !groupId || !groupData || !groupData.members.includes(currentUser.uid)) {
                 showMessageBox("Cannot send message. Not authenticated or not a group member.", 'error');
-                console.error("JCHAT_ERROR: Attempted to send message without proper authentication or membership.");
+                console.error("Grazzy_ERROR: Attempted to send message without proper authentication or membership.");
                 return;
             }
 
@@ -1859,7 +1859,7 @@
                                 });
                                 showMessageBox(`You earned ${GAS_REWARD_AMOUNT} Gas!`, "success", 3000);
                             } else {
-                                console.warn(`JCHAT_WARNING: Group ${groupData.name} has insufficient Gas (${currentGroupGasBalance}) to reward ${GAS_REWARD_AMOUNT}.`);
+                                console.warn(`Grazzy_WARNING: Group ${groupData.name} has insufficient Gas (${currentGroupGasBalance}) to reward ${GAS_REWARD_AMOUNT}.`);
                                 showMessageBox(`Group has insufficient Gas for your reward.`, "warning", 3000);
                             }
                         }
@@ -1896,7 +1896,7 @@
                         const newMsgRef = doc(messagesCollectionRef);
                         transaction.set(newMsgRef, {
                             senderId: currentUser.uid,
-                            senderUsername: currentUserProfileData.username || "JCHAT User",
+                            senderUsername: currentUserProfileData.username || "Grazzy User",
                             senderProfilePicId: currentUserProfileData.profilePicId || null,
                             content: content,
                             mediaUrl: mediaInfo ? mediaInfo.url : null,
@@ -1915,7 +1915,7 @@
                 // If we created a new message, create notifications for group members (outside transaction)
                 try{
                     if (typeof createdMessageRef !== 'undefined' && createdMessageRef) {
-                        const senderName = currentUserProfileData.username || (currentUser && (currentUser.displayName || currentUser.email)) || 'Nuvia User';
+                        const senderName = currentUserProfileData.username || (currentUser && (currentUser.displayName || currentUser.email)) || 'Grazzy User';
                         const senderPic = currentUserProfileData.profilePicId || (currentUser && currentUser.photoURL) || null;
                         const notifPayload = {
                             type: 'group_message',
@@ -1948,7 +1948,7 @@
                 clearMediaSelection(); // Clear media preview
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error sending/updating message or during transaction:", error);
+                console.error("Grazzy_ERROR: Error sending/updating message or during transaction:", error);
                 showMessageBox(`Failed to send/update message: ${error.message}`, 'error');
             } finally {
                 sendMessageButton.disabled = false;
@@ -2083,7 +2083,7 @@
             if (user) {
                 currentUser = user;
                 isAuthReady = true; // Set auth ready flag
-                console.log("JCHAT_DEBUG: User authenticated:", currentUser.uid);
+                console.log("Grazzy_DEBUG: User authenticated:", currentUser.uid);
                 await fetchAndDisplayHeaderProfile(user);
                 fetchNotificationCount(user.uid);
                 // Only call loadGroupData once authentication is confirmed

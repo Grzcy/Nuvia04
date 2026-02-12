@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - User Levels</title>
+    <title>Grazzy - User Levels</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -770,7 +770,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <ul>
                     <li><a href="/index.html">Home</a></li>
@@ -944,7 +944,7 @@
 
                 const usernameInitial = (profileData?.username || user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId || user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData?.username || user.displayName || "JCHAT User";
+                headerDisplayName.textContent = profileData?.username || user.displayName || "Grazzy User";
 
                 if (document.getElementById('profileLink')) document.getElementById('profileLink').href = `/profile.html?userId=${user.uid}`; // Null check
                 if (logoutButton) logoutButton.disabled = false; // Null check
@@ -959,10 +959,10 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 if (logoutButton) logoutButton.disabled = false; // Null check
             }
         }
@@ -986,7 +986,7 @@
                     }
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching notification count:", error);
+                console.error("Grazzy_ERROR: Error fetching notification count:", error);
                 if (notificationCountElement) notificationCountElement.style.display = 'none'; // Null check
             }
         }
@@ -996,7 +996,7 @@
                 await signOut(auth);
                 window.location.href = '/login.html';
             } catch (error) {
-                console.error("JCHAT_ERROR: Error logging out:", error);
+                console.error("Grazzy_ERROR: Error logging out:", error);
                 // Using alert for simplicity, replace with custom modal if needed
                 // Note: The original Home.html uses a custom message box, consider implementing that for consistency.
                 alert(`Failed to log out: ${error.message}`);
@@ -1090,7 +1090,7 @@
             } else if (level >= 101 && level <= 250) { // Tier 3: Dedicated User (Levels 101 - 250)
                 jCoinReward = 750 + (level - 101) * 12;
                 gasReward = 150 + (level - 101) * 5;
-                const tierNames = ["Dedicated User", "JCHAT Elite", "Master Communicator", "Community Architect"];
+                const tierNames = ["Dedicated User", "Grazzy Elite", "Master Communicator", "Community Architect"];
                 const tierIcons = ["fas fa-user-shield", "fas fa-gem", "fas fa-microphone-alt", "fas fa-sitemap"];
                 const tierIndex = Math.floor((level - 101) / 37); // Cycle every ~37 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -1102,23 +1102,23 @@
                 if (level === 125) otherRewards.push("Title: 'Rising Star'", "Unlock: Custom Chat Font (Style 1)");
                 if (level === 130) otherRewards.push("Unlock: 7-Day XP Boost");
                 if (level === 140) otherRewards.push("Permanent: 3% JCoin Shop Discount");
-                if (level === 150) otherRewards.push("Badge: 'JCHAT Expert'", "Unlock: Premium Profile Theme (Animated 1)");
+                if (level === 150) otherRewards.push("Badge: 'Grazzy Expert'", "Unlock: Premium Profile Theme (Animated 1)");
                 if (level === 160) otherRewards.push("Increased Group Member Capacity (+5)");
                 if (level === 170) otherRewards.push("Unlock: Animated Emote Pack (Set 2)");
                 if (level === 175) otherRewards.push("Title: 'Elite Communicator'", "Unlock: Custom Chat Font (Style 2)");
                 if (level === 180) otherRewards.push("Increased Message Character Limit (+25)");
                 if (level === 190) otherRewards.push("Permanent: 4% JCoin Shop Discount");
-                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'JCHAT Champion'", "Unlock: Exclusive 'Diamond' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
+                if (level === 200) otherRewards.push("Badge: 'Double Century'", "Title: 'Grazzy Champion'", "Unlock: Exclusive 'Diamond' Profile Picture Frame", "Voucher: 1-Day Free Group Promotion");
                 if (level === 210) otherRewards.push("Increased Media Upload Size (+10MB)");
                 if (level === 220) otherRewards.push("Unlock: Premium Profile Theme (Animated 2)");
                 if (level === 230) otherRewards.push("Unlock: Rare Emote Pack (Set 2)");
                 if (level === 240) otherRewards.push("Priority Support Access");
                 if (level === 250) otherRewards.push("Badge: 'Quarter-Millennium'", "Title: 'The Architect'", "Early Access: Next Major Feature Beta");
 
-            } else if (level >= 251 && level <= 400) { // Tier 4: JCHAT Legend (Levels 251 - 400)
+            } else if (level >= 251 && level <= 400) { // Tier 4: Grazzy Legend (Levels 251 - 400)
                 jCoinReward = 2500 + (level - 251) * 20;
                 gasReward = 500 + (level - 251) * 10;
-                const tierNames = ["JCHAT Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
+                const tierNames = ["Grazzy Legend", "Grandmaster", "Cosmic Converser", "Eternal Speaker"];
                 const tierIcons = ["fas fa-star-half-alt", "fas fa-chess-king", "fas fa-galaxy", "fas fa-infinity"];
                 const tierIndex = Math.floor((level - 251) / 37); // Cycle every ~37 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -1128,11 +1128,11 @@
                 if (level === 260) otherRewards.push("Permanent: 5% JCoin Shop Discount");
                 if (level === 275) otherRewards.push("Title: 'Grand Strategist'", "Unlock: Legendary Emote Pack (Set 1)");
                 if (level === 290) otherRewards.push("Increased Group Creation Limit (+2)");
-                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'JCHAT Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
+                if (level === 300) otherRewards.push("Badge: 'Triple Century'", "Title: 'Grazzy Grandmaster'", "Voucher: 3-Day Free Group Promotion", "Unlock: Exclusive VIP Chat Room Access");
                 if (level === 310) otherRewards.push("Increased Media Upload Size (+15MB)");
                 if (level === 325) otherRewards.push("Title: 'Cosmic Weaver'", "Unlock: Custom Chat Font (Style 3)");
                 if (level === 340) otherRewards.push("Permanent: 7% JCoin Shop Discount");
-                if (level === 350) otherRewards.push("Badge: 'JCHAT Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
+                if (level === 350) otherRewards.push("Badge: 'Grazzy Luminary'", "Unlock: Personalized Emote Slot (1 custom upload)");
                 if (level === 360) otherRewards.push("Increased Group Member Capacity (+10)");
                 if (level === 375) otherRewards.push("Title: 'The Eternal Flame'", "Unlock: Legendary Emote Pack (Set 2)");
                 if (level === 390) otherRewards.push("Ad-Free Experience (1 Month)");
@@ -1141,7 +1141,7 @@
             } else if (level >= 401 && level <= 500) { // Tier 5: The Unrivaled (Levels 401 - 500)
                 jCoinReward = 5000 + (level - 401) * 30;
                 gasReward = 1000 + (level - 401) * 15;
-                const tierNames = ["The Unrivaled", "Cosmic Creator", "JCHAT Deity", "Apex Being"];
+                const tierNames = ["The Unrivaled", "Cosmic Creator", "Grazzy Deity", "Apex Being"];
                 const tierIcons = ["fas fa-infinity", "fas fa-solar-system", "fas fa-hand-holding-heart", "fas fa-star-and-crescent"];
                 const tierIndex = Math.floor((level - 401) / 25); // Cycle every 25 levels for 4 names
                 name = `${tierNames[tierIndex % tierNames.length]} Lv. ${level}`;
@@ -1158,11 +1158,11 @@
                 if (level === 490) otherRewards.push("Unlock: Exclusive 'Cosmic' Animated Avatar Frame");
                 if (level === 500) {
                     otherRewards.push(
-                        "Badge: 'JCHAT Deity'",
+                        "Badge: 'Grazzy Deity'",
                         "Title: 'The Absolute'",
                         "Lifetime Premium Status (Ad-Free, All Cosmetics Unlocked)",
                         "Personalized Group Creation Perk (Custom starting benefits for new groups)",
-                        "Acknowledgment on JCHAT Hall of Fame (Your name/ID listed on a special page)",
+                        "Acknowledgment on Grazzy Hall of Fame (Your name/ID listed on a special page)",
                         "Exclusive Discord Role (if applicable)",
                         "Voting Rights on Future Feature Development"
                     );
@@ -1265,17 +1265,17 @@
                     });
                 }
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     // Only redirect if there's still no current user after trying to sign in
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';

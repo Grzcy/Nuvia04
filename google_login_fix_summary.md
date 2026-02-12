@@ -1,4 +1,4 @@
-# 🔧 Google Login Fix Summary - JCHAT
+# 🔧 Google Login Fix Summary - Grazzy
 
 ## ✅ What I've Fixed
 

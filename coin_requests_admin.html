@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - Admin: Coin Requests</title>
+    <title>Grazzy - Admin: Coin Requests</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -809,7 +809,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <ul>
                     <li><a href="/index.html">Home</a></li>
@@ -1155,7 +1155,7 @@
                         xpToNextLevel: 100
                     };
                     await setDoc(privateProfileDocRef, profileData); // Create private profile
-                    console.log("JCHAT_DEBUG: Created new private profile for header:", profileData);
+                    console.log("Grazzy_DEBUG: Created new private profile for header:", profileData);
                 }
 
                 // Update public profile summary
@@ -1168,22 +1168,22 @@
                     email: profileData.email // Include email for admin search
                 };
                 await setDoc(publicProfileDocRef, publicProfileSummary, { merge: true }); // Create/update public profile
-                console.log("JCHAT_DEBUG: Updated public profile summary:", publicProfileSummary);
+                console.log("Grazzy_DEBUG: Updated public profile summary:", publicProfileSummary);
 
 
                 // Update header UI
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 headerNavLinkProfile.href = `/profile.html?userId=${user.uid}`;
                 document.getElementById('profileLink').href = `/profile.html?userId=${user.uid}`;
 
                 logoutButton.disabled = false;
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
                 logoutButton.disabled = false;
             }
@@ -1298,7 +1298,7 @@
                     showMessageBox("Request Rejected.", 'info');
                 }
             } catch (error) {
-                console.error(`JCHAT_ERROR: Error processing request ${newStatus}:`, error);
+                console.error(`Grazzy_ERROR: Error processing request ${newStatus}:`, error);
                 showMessageBox(`Failed to ${newStatus.toLowerCase()} request: ${error.message}`, 'error');
             }
         }
@@ -1327,7 +1327,7 @@
                 applyFiltersAndRender(); // Re-render with current filters
                 showMessageBox("Coin requests updated.", 'info');
             }, (error) => {
-                console.error("JCHAT_ERROR: Error listening to coin requests:", error);
+                console.error("Grazzy_ERROR: Error listening to coin requests:", error);
                 requestsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--pink);">Failed to load requests. Check console.</td></tr>';
                 showMessageBox(`Error loading requests: ${error.message}`, 'error');
             });
@@ -1338,15 +1338,15 @@
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
-                console.log("JCHAT_DEBUG: User authenticated in Coin Requests Admin Page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Coin Requests Admin Page:", user.uid);
 
                 // Hardcoded admin check
                 if (user.uid === ADMIN_UID) {
-                    console.log("JCHAT_DEBUG: User is the hardcoded administrator.");
+                    console.log("Grazzy_DEBUG: User is the hardcoded administrator.");
                     await fetchAndDisplayHeaderProfile(user); // Update header
                     setupCoinRequestsListener(); // Start real-time listener for requests
                 } else {
-                    console.log("JCHAT_DEBUG: User is NOT the hardcoded administrator. Redirecting.");
+                    console.log("Grazzy_DEBUG: User is NOT the hardcoded administrator. Redirecting.");
                     isAuthReady = false;
                     logoutButton.disabled = true;
                     headerDisplayName.textContent = "Unauthorized";
@@ -1359,7 +1359,7 @@
                     }, 3000);
                 }
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Redirecting to login page for admin access.");
+                console.log("Grazzy_DEBUG: No user signed in. Redirecting to login page for admin access.");
                 isAuthReady = false;
                 logoutButton.disabled = true;
                 headerDisplayName.textContent = "Guest";
@@ -1393,7 +1393,7 @@
             window.addEventListener('beforeunload', () => {
                 if (unsubscribeFromRequests) {
                     unsubscribeFromRequests();
-                    console.log("JCHAT_DEBUG: Detached Firestore coin requests listener.");
+                    console.log("Grazzy_DEBUG: Detached Firestore coin requests listener.");
                 }
             });
         });

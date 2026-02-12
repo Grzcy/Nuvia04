@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvia - Login</title>
+    <title>Grazzy - Login</title>
     <script>
       (function(){
         // Hide page until we know auth state to prevent showing login to already-authenticated users
@@ -377,9 +377,9 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <div class="jchat-title">Nuvia</div>
-            <h1 id="loginHeading">Log In to Nuvia</h1>
-            <p>Connect with friends and the world around you on Nuvia.</p>
+            <div class="jchat-title">Grazzy</div>
+            <h1 id="loginHeading">Log In to Grazzy</h1>
+            <p>Connect with friends and the world around you on Grazzy.</p>
         </div>
         
         <form id="loginForm">
@@ -430,7 +430,7 @@
             </div>
 
             <div class="signup-link">
-                <span id="signup-link-text">New to Nuvia? <a href="#" onclick="goToSignup(event)">Create a new account</a></span>
+                <span id="signup-link-text">New to Grazzy? <a href="#" onclick="goToSignup(event)">Create a new account</a></span>
             </div>
         </form>
     </div>
@@ -490,13 +490,13 @@
 
             if (container.classList.contains('signup-mode')) {
                 container.classList.remove('signup-mode');
-                header.textContent = 'Log In to Nuvia';
+                header.textContent = 'Log In to Grazzy';
                 submitBtn.textContent = 'Log In';
-                signupLink.innerHTML = '<span>New to Nuvia? <a href="#" onclick="goToSignup(event)">Create a new account</a></span>';
+                signupLink.innerHTML = '<span>New to Grazzy? <a href="#" onclick="goToSignup(event)">Create a new account</a></span>';
                 rememberForgot.style.display = 'flex';
             } else {
                 container.classList.add('signup-mode');
-                header.textContent = 'Sign Up for Nuvia';
+                header.textContent = 'Sign Up for Grazzy';
                 submitBtn.textContent = 'Sign Up';
                 signupLink.innerHTML = '<span>Already have an account? <a href="#" onclick="goToSignup(event)">Log in</a></span>';
                 rememberForgot.style.display = 'none';
