@@ -758,18 +758,44 @@
 
             hideError();
 
+            // Disable submit button to prevent double submission
+            const submitBtn = document.querySelector('.login-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = isSignupMode ? 'Creating Account...' : 'Logging In...';
+
             try {
                 if (isSignupMode) {
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                     console.log('Signup successful:', userCredential.user.uid);
+                    
+                    // Show success message before redirect
+                    showCustomModal('success', 'Account Created!',
+                        `Welcome to Grazzy! Your account has been created successfully. Redirecting to home...`,
+                        () => {
+                            localStorage.setItem('nuvia_auth_status', 'authenticated');
+                            sessionStorage.setItem('nuvia_last_auth', '1');
+                            window.location.href = 'index.html';
+                        }
+                    );
+                    
+                    // Auto redirect after 2 seconds
+                    setTimeout(() => {
+                        localStorage.setItem('nuvia_auth_status', 'authenticated');
+                        sessionStorage.setItem('nuvia_last_auth', '1');
+                        window.location.href = 'index.html';
+                    }, 2000);
                 } else {
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     console.log('Login successful:', userCredential.user.uid);
+                    localStorage.setItem('nuvia_auth_status', 'authenticated');
+                    sessionStorage.setItem('nuvia_last_auth', '1');
+                    window.location.href = 'index.html';
                 }
-                localStorage.setItem('nuvia_auth_status', 'authenticated');
-                sessionStorage.setItem('nuvia_last_auth', '1');
-                window.location.href = 'index.html';
             } catch (error) {
+                // Re-enable submit button on error
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
                 console.error('Authentication error:', error.code, error.message);
                 let errorMessage = 'Login failed. Please try again.';
                 
