@@ -1,4 +1,4 @@
-# 🚀 JCHAT Premium Unlock System - Setup Guide
+# 🚀 Grazzy Premium Unlock System - Setup Guide
 
 ## ✅ **What's Been Added**
 
@@ -27,7 +27,7 @@ Your Profile.html now has a **complete premium unlock system** that:
 
 **Current codes (change these to your own):**
 - `PREMIUM2024`
-- `JCHATPRO`
+- `GrazzyPRO`
 - `UNLOCKNOW`
 
 **To change codes:**

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuvia - Content Moderation</title>
+  <title>Grazzy - Content Moderation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,7 +122,7 @@
 <body class="theme-dark-mode">
   <header>
     <div class="header-content-wrapper">
-      <a href="/index.html" class="logo"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+      <a href="/index.html" class="logo"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
       <div class="user-profile-header">
         <button id="logoutButton" aria-label="Logout" disabled><i class="fas fa-sign-out-alt"></i></button>
         <a href="/profile.html" id="profileLink">
@@ -280,12 +280,12 @@
         await setDoc(publicProfileDocRef, { username: profileData.username, profilePicId: profileData.profilePicId, userId: user.uid, email: profileData.email, totalPosts: profileData.totalPosts, level: profileData.level, jCoins: profileData.jCoins, banned: profileData.banned }, { merge: true });
         const usernameInitial = (profileData.username || 'U').charAt(0).toUpperCase();
         displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-        headerDisplayName.textContent = profileData.username || 'Nuvia User';
+        headerDisplayName.textContent = profileData.username || 'Grazzy User';
         if (profileLink) profileLink.href = `/profile.html?userId=${user.uid}`;
         logoutButton.disabled = false;
       }catch(err){
         console.error('Header profile error', err);
-        headerDisplayName.textContent = user.displayName || 'Nuvia User';
+        headerDisplayName.textContent = user.displayName || 'Grazzy User';
         logoutButton.disabled = false;
       }
     }

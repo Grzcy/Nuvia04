@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvia - Admin Management</title>
+    <title>Grazzy - Admin Management</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -828,7 +828,7 @@
             <!-- Left Column: User List and Filter -->
             <div class="left-column">
                 <div class="card">
-                    <h2 class="section-title">All JCHAT Users</h2>
+                    <h2 class="section-title">All Grazzy Users</h2>
                     <div class="form-group">
                         <label for="searchQueryInput">Filter Users:</label>
                         <input type="text" id="searchQueryInput" placeholder="Filter by ID or Username...">
@@ -1118,7 +1118,7 @@
         function showCustomConfirm(message) {
             return new Promise((resolve) => {
                 if (!customConfirmModal || !confirmModalMessage || !confirmYesBtn || !confirmNoBtn) {
-                    console.error("JCHAT_ERROR: Custom confirmation modal elements not found.");
+                    console.error("Grazzy_ERROR: Custom confirmation modal elements not found.");
                     resolve(false);
                     return;
                 }
@@ -1181,7 +1181,7 @@
                     imgElement.style.display = 'block';
                     if (iconElement) iconElement.style.display = 'none';
                     imgElement.onerror = () => {
-                        console.error(`JCHAT_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
+                        console.error(`Grazzy_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
                         imgElement.src = `https://placehold.co/60x60/CCCCCC/000000?text=${usernameInitial}`;
                         imgElement.style.display = 'block';
                         if (iconElement) iconElement.style.display = 'none';
@@ -1246,7 +1246,7 @@
          */
         async function fetchAllUsers() {
             if (!currentUser || currentUser.uid !== ADMIN_UID) {
-                console.warn("JCHAT_WARN: Not an admin or not authenticated. Cannot fetch all users.");
+                console.warn("Grazzy_WARN: Not an admin or not authenticated. Cannot fetch all users.");
                 return;
             }
 
@@ -1291,7 +1291,7 @@
                 showMessageBox("Users loaded.", "success");
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching all users:", error);
+                console.error("Grazzy_ERROR: Error fetching all users:", error);
                 showMessageBox(`Error loading users: ${error.message}`, "error");
                 loadingUsersMessage.textContent = 'Failed to load users.';
             }
@@ -1529,7 +1529,7 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error removing friend:", error);
+                console.error("Grazzy_ERROR: Error removing friend:", error);
                 showMessageBox(`Failed to remove friend: ${error.message}`, "error");
             }
         }
@@ -1629,7 +1629,7 @@
                 jcoinsAmountInput.value = '';
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error updating user profile:", error);
+                console.error("Grazzy_ERROR: Error updating user profile:", error);
                 showMessageBox(`Failed to update user: ${error.message}`, "error");
             } finally {
                 updateUserBtn.disabled = false;
@@ -1678,7 +1678,7 @@
                 }
 
             } catch (error) {
-                console.error(`JCHAT_ERROR: Error ${action}ning user:`, error);
+                console.error(`Grazzy_ERROR: Error ${action}ning user:`, error);
                 showMessageBox(`Failed to ${action} user: ${error.message}`, "error");
             } finally {
                 toggleBanBtn.disabled = false;
@@ -1726,7 +1726,7 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error resetting user level/XP:", error);
+                console.error("Grazzy_ERROR: Error resetting user level/XP:", error);
                 showMessageBox(`Failed to reset level and XP: ${error.message}`, "error");
             } finally {
                 resetLevelXpBtn.disabled = false;
@@ -1769,7 +1769,7 @@
                 await fetchAllUsers(); // Refresh the user list
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deleting user account:", error);
+                console.error("Grazzy_ERROR: Error deleting user account:", error);
                 showMessageBox(`Failed to delete user account: ${error.message}`, "error");
             } finally {
                 deleteUserBtn.disabled = false;
@@ -1790,7 +1790,7 @@
                     document.body.removeChild(tempInput);
                     showMessageBox('User ID copied to clipboard!', 'success', false, 1500);
                 } catch (err) {
-                    console.error('JCHAT_ERROR: Failed to copy user ID:', err);
+                    console.error('Grazzy_ERROR: Failed to copy user ID:', err);
                     showMessageBox('Failed to copy User ID.', 'error');
                 }
             } else {
@@ -1808,7 +1808,7 @@
                 await setDoc(settingsDocRef, { entitlements: { [flag]: value } }, { merge: true });
                 showMessageBox(`${flag === 'pro' ? 'Pro' : 'Ad‑Free'} ${value ? 'granted' : 'revoked'} for user.`, 'success');
             } catch (e) {
-                console.error('JCHAT_ERROR: updateEntitlement failed:', e);
+                console.error('Grazzy_ERROR: updateEntitlement failed:', e);
                 showMessageBox(`Failed to update entitlement: ${e.message}`, 'error');
             }
         }
@@ -1818,7 +1818,7 @@
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
-                console.log("JCHAT_DEBUG: User authenticated in Admin page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Admin page:", user.uid);
 
                 if (currentUser.uid === ADMIN_UID) {
                     accessDeniedOverlay.style.display = 'none';
@@ -1847,17 +1847,17 @@
                     userListContainer.innerHTML = '<p class="no-users-message">Access denied. Please log in as an administrator.</p>';
                 }
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     // If even anonymous sign-in fails, redirect to login
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';

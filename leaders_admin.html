@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nuvia - Leaders Admin</title>
+  <title>Grazzy - Leaders Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
@@ -54,7 +54,7 @@
 <body>
   <header>
     <div class="header-content">
-      <a href="/index.html" class="brand-link"><img src="assets/security.png" alt="Nuvia Security" style="height:24px;width:auto" onerror="this.style.display='none'"/><span>Nuvia</span></a>
+      <a href="/index.html" class="brand-link"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"/><span>Grazzy</span></a>
       <div class="user-strip">
         <div class="notif"><a href="/notifications.html" aria-label="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notificationCount">0</span></a></div>
         <button id="logoutBtn" aria-label="Logout"><i class="fas fa-sign-out-alt"></i></button>
@@ -196,10 +196,10 @@
         await setDoc(publicRef, { username: data.username, profilePicId: data.profilePicId, userId: user.uid }, { merge:true });
         const usernameInitial = (data.username || "N").charAt(0).toUpperCase();
         displayProfilePicture(headerProfilePic, headerAvatarIcon, data.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-        headerDisplayName.textContent = data.username || 'Nuvia User';
+        headerDisplayName.textContent = data.username || 'Grazzy User';
         if (profileLink) profileLink.href = `/profile.html?userId=${user.uid}`;
         logoutBtn.disabled = false;
-      }catch(err){ console.error(err); headerDisplayName.textContent='Nuvia User'; logoutBtn.disabled=false; }
+      }catch(err){ console.error(err); headerDisplayName.textContent='Grazzy User'; logoutBtn.disabled=false; }
     }
 
     async function listenNotifications(userId){

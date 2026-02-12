@@ -1,8 +1,8 @@
-# Nuvia Project Structure & Architecture
+# Grazzy Project Structure & Architecture
 
 ## Project Overview
 
-**Nuvia** is a full-featured social chat platform built with:
+**Grazzy** is a full-featured social chat platform built with:
 - **Frontend**: Vanilla JavaScript + HTML/CSS (ES6 modules)
 - **Backend**: Node.js Express server with Google Gemini AI integration
 - **Database**: Firebase (Firestore + Realtime Database)
@@ -15,7 +15,7 @@
 ## Directory Structure
 
 ```
-Nuvia/
+Grazzy/
 ├── Root HTML Pages (59 files)
 │   ├── index.html                 # Home/Feed page
 │   ├── login.html                 # Authentication page
@@ -498,7 +498,7 @@ Required:
 
 - **Admin Email:** eletexjoeytex@gmail.com (auto-admin access)
 - **Firebase Console:** https://console.firebase.google.com/project/grazzy-9e736
-- **GitHub:** Grzcy/Nuvia04
+- **GitHub:** Grzcy/Grazzy04
 
 ---
 

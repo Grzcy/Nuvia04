@@ -5,7 +5,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - J/G Link Management</title>
+    <title>Grazzy - J/G Link Management</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
 
         /* Global CSS Variables for easy theme switching */
         :root {
-            /* Core JCHAT Colors */
+            /* Core Grazzy Colors */
             --pink: #ff2e92;
             --blue: #00d5ff;
             --radius: 20px;
@@ -691,7 +691,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <ul>
                     <li><a href="/admin.html" class="active">Admin Dashboard</a></li>
@@ -963,7 +963,7 @@
                 // Update header UI
                 const usernameInitial = (profileData?.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData?.username || "JCHAT User";
+                headerDisplayName.textContent = profileData?.username || "Grazzy User";
                 headerNavLinkProfile.href = `/profile.html?userId=${user.uid}`;
                 logoutButton.disabled = false;
 
@@ -971,7 +971,7 @@
                 console.error("Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
                 logoutButton.disabled = false;
             }

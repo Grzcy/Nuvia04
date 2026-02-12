@@ -1,4 +1,4 @@
-# Admin Setup Guide - Nuvia App
+# Admin Setup Guide - Grazzy App
 
 ## Admin Email Configuration
 

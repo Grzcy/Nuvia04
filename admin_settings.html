@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvia - System Settings</title>
+    <title>Grazzy - System Settings</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1009,7 +1009,7 @@
             <button id="sidebarToggleFab" aria-label="Toggle Navigation">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Nuvia Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <div class="user-profile-header">
                 <a href="/admin.html" id="adminIconLink" aria-label="Admin Dashboard">
                     <i class="fas fa-user-cog"></i>
@@ -1155,7 +1155,7 @@
     <!-- Sidebar Navigation (Copied from Home.html) -->
     <aside id="sidebarNav" class="sidebar-hidden">
         <div class="sidebar-header">
-            <span class="sidebar-title">JCHAT Menu</span>
+            <span class="sidebar-title">Grazzy Menu</span>
             <button id="sidebarCloseBtn" aria-label="Close Menu">
                 <i class="fas fa-times"></i>
             </button>
@@ -1201,7 +1201,7 @@
     </aside>
 
     <script type="module">
-        console.log("JCHAT_DEBUG: System_Settings.html script started.");
+        console.log("Grazzy_DEBUG: System_Settings.html script started.");
 
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -1326,7 +1326,7 @@
         // --- Utility Functions (Copied from Home.html) ---
         function showMessageBox(message, type, isPersistent = false) {
             if (!messageBox) {
-                console.error("JCHAT_ERROR: messageBox element not found.");
+                console.error("Grazzy_ERROR: messageBox element not found.");
                 return;
             }
             if (messageBox.timeoutId) {
@@ -1449,7 +1449,7 @@
                 }, 1500);
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error logging out:", error);
+                console.error("Grazzy_ERROR: Error logging out:", error);
                 showMessageBox(`Failed to log out: ${error.message}. Please try again.`, 'error');
             }
         }
@@ -1472,13 +1472,13 @@
                 }
             }
             catch (error) {
-                console.error("JCHAT_ERROR: Error fetching notification count:", error);
+                console.error("Grazzy_ERROR: Error fetching notification count:", error);
                 if (notificationCountElement) notificationCountElement.style.display = 'none';
             }
         }
 
         async function fetchAndDisplayHeaderProfile(user) {
-            console.log("JCHAT_DEBUG: Entering fetchAndDisplayHeaderProfile for user:", user.uid);
+            console.log("Grazzy_DEBUG: Entering fetchAndDisplayHeaderProfile for user:", user.uid);
             try {
                 const privateProfileDocRef = doc(db, "artifacts", appId, "users", user.uid, "profiles", "user_profile");
                 const privateDocSnap = await getDoc(privateProfileDocRef);
@@ -1486,7 +1486,7 @@
 
                 if (privateDocSnap.exists()) {
                     profileData = privateDocSnap.data();
-                    console.log("JCHAT_DEBUG: Fetched existing private profile data:", profileData);
+                    console.log("Grazzy_DEBUG: Fetched existing private profile data:", profileData);
                 } else {
                     // This should ideally not happen for an authenticated user, but as a fallback
                     profileData = {
@@ -1504,14 +1504,14 @@
                         lastLoginBonusClaimed: null, isBanned: false
                     };
                     await setDoc(privateProfileDocRef, profileData);
-                    console.log("JCHAT_DEBUG: Created new private profile data for header display:", profileData);
+                    console.log("Grazzy_DEBUG: Created new private profile data for header display:", profileData);
                 }
                 currentUserProfileData = profileData;
 
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 if (headerProfilePic && headerAvatarIcon && headerDisplayName) {
                     displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                    headerDisplayName.textContent = profileData.username || "JCHAT User";
+                    headerDisplayName.textContent = profileData.username || "Grazzy User";
                 }
                 if (profileLink) profileLink.href = `/profile.html?userId=${user.uid}`;
 
@@ -1519,19 +1519,19 @@
                 if (adminIconLink) {
                     if (user.uid === ADMIN_UID) {
                         adminIconLink.style.display = 'block';
-                        console.log("JCHAT_DEBUG: Admin icon displayed.");
+                        console.log("Grazzy_DEBUG: Admin icon displayed.");
                     } else {
                         adminIconLink.style.display = 'none';
-                        console.log("JCHAT_DEBUG: Admin icon hidden.");
+                        console.log("Grazzy_DEBUG: Admin icon hidden.");
                     }
                 }
-                console.log("JCHAT_DEBUG: fetchAndDisplayHeaderProfile completed successfully.");
+                console.log("Grazzy_DEBUG: fetchAndDisplayHeaderProfile completed successfully.");
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 if (headerProfilePic && headerAvatarIcon && headerDisplayName) {
                     displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                    headerDisplayName.textContent = user.displayName || "JCHAT User";
+                    headerDisplayName.textContent = user.displayName || "Grazzy User";
                 }
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
             }
@@ -1541,14 +1541,14 @@
         const SYSTEM_SETTINGS_DOC_REF = doc(db, "artifacts", appId, "public", "data", "settings", "system_settings");
 
         async function fetchSystemSettings() {
-            console.log("JCHAT_DEBUG: Fetching system settings...");
+            console.log("Grazzy_DEBUG: Fetching system settings...");
             try {
                 const docSnap = await getDoc(SYSTEM_SETTINGS_DOC_REF);
                 if (docSnap.exists()) {
                     currentSystemSettings = docSnap.data();
-                    console.log("JCHAT_DEBUG: System settings fetched:", currentSystemSettings);
+                    console.log("Grazzy_DEBUG: System settings fetched:", currentSystemSettings);
                 } else {
-                    console.warn("JCHAT_WARNING: System settings document not found. Initializing with default values.");
+                    console.warn("Grazzy_WARNING: System settings document not found. Initializing with default values.");
                     currentSystemSettings = {
                         jcoinNairaRate: 7.5,
                         gasJcoinRate: 0.1,
@@ -1564,17 +1564,17 @@
                         globalAnnouncement: ""
                     };
                     await setDoc(SYSTEM_SETTINGS_DOC_REF, currentSystemSettings);
-                    console.log("JCHAT_DEBUG: Default system settings created.");
+                    console.log("Grazzy_DEBUG: Default system settings created.");
                 }
                 renderSettingsToUI(currentSystemSettings);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching system settings:", error);
+                console.error("Grazzy_ERROR: Error fetching system settings:", error);
                 showMessageBox(`Failed to load settings: ${error.message}`, 'error', true);
             }
         }
 
         function renderSettingsToUI(settings) {
-            console.log("JCHAT_DEBUG: Rendering settings to UI:", settings);
+            console.log("Grazzy_DEBUG: Rendering settings to UI:", settings);
             if (jcoinNairaRateInput) jcoinNairaRateInput.value = settings.jcoinNairaRate ?? 7.5;
             if (gasJcoinRateInput) gasJcoinRateInput.value = settings.gasJcoinRate ?? 0.1;
             if (dailyBonusAmountInput) dailyBonusAmountInput.value = settings.dailyBonusAmount ?? 50;
@@ -1630,7 +1630,7 @@
                 playNotificationSound('success');
                 currentSystemSettings = newSettings; // Update local state
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving system settings:", error);
+                console.error("Grazzy_ERROR: Error saving system settings:", error);
                 showMessageBox(`Failed to save settings: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -1645,7 +1645,7 @@
 
         // --- Authentication State Listener ---
         onAuthStateChanged(auth, async (user) => {
-            console.log("JCHAT_DEBUG: onAuthStateChanged triggered. User:", user ? user.uid : "null");
+            console.log("Grazzy_DEBUG: onAuthStateChanged triggered. User:", user ? user.uid : "null");
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
@@ -1653,17 +1653,17 @@
                 await fetchNotificationCount(user.uid);
 
                 if (user.uid === ADMIN_UID) {
-                    console.log("JCHAT_DEBUG: User is admin. Displaying settings form.");
+                    console.log("Grazzy_DEBUG: User is admin. Displaying settings form.");
                     if (unauthorizedMessage) unauthorizedMessage.style.display = 'none';
                     if (systemSettingsForm) systemSettingsForm.style.display = 'flex';
                     // Set up real-time listener for settings
                     const unsubscribeSettings = onSnapshot(SYSTEM_SETTINGS_DOC_REF, (docSnap) => {
                         if (docSnap.exists()) {
                             currentSystemSettings = docSnap.data();
-                            console.log("JCHAT_DEBUG: Real-time system settings update:", currentSystemSettings);
+                            console.log("Grazzy_DEBUG: Real-time system settings update:", currentSystemSettings);
                             renderSettingsToUI(currentSystemSettings);
                         } else {
-                            console.warn("JCHAT_WARNING: System settings document disappeared. Re-initializing with defaults.");
+                            console.warn("Grazzy_WARNING: System settings document disappeared. Re-initializing with defaults.");
                             // If document is deleted, re-create with defaults
                             setDoc(SYSTEM_SETTINGS_DOC_REF, {
                                 jcoinNairaRate: 7.5, gasJcoinRate: 0.1, dailyBonusAmount: 50,
@@ -1674,13 +1674,13 @@
                             }).then(() => fetchSystemSettings()); // Re-fetch and render
                         }
                     }, (error) => {
-                        console.error("JCHAT_ERROR: Error listening to system settings:", error);
+                        console.error("Grazzy_ERROR: Error listening to system settings:", error);
                         showMessageBox("Failed to get real-time settings updates.", 'error', true);
                     });
                     unsubscribeListeners.push(unsubscribeSettings);
                     fetchSystemSettings(); // Initial fetch
                 } else {
-                    console.log("JCHAT_DEBUG: User is NOT admin. Displaying unauthorized message.");
+                    console.log("Grazzy_DEBUG: User is NOT admin. Displaying unauthorized message.");
                     if (unauthorizedMessage) unauthorizedMessage.style.display = 'flex';
                     if (systemSettingsForm) systemSettingsForm.style.display = 'none';
                     if (goHomeButton) {
@@ -1690,17 +1690,17 @@
                     }
                 }
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';
                         return;
@@ -1714,7 +1714,7 @@
                     await fetchNotificationCount(currentUser.uid);
                     // Re-evaluate admin status after successful anonymous/custom token sign-in
                     if (currentUser.uid === ADMIN_UID) {
-                        console.log("JCHAT_DEBUG: User is admin after anonymous/custom sign-in. Displaying settings form.");
+                        console.log("Grazzy_DEBUG: User is admin after anonymous/custom sign-in. Displaying settings form.");
                         if (unauthorizedMessage) unauthorizedMessage.style.display = 'none';
                         if (systemSettingsForm) systemSettingsForm.style.display = 'flex';
                         const unsubscribeSettings = onSnapshot(SYSTEM_SETTINGS_DOC_REF, (docSnap) => {
@@ -1731,13 +1731,13 @@
                                 }).then(() => fetchSystemSettings());
                             }
                         }, (error) => {
-                            console.error("JCHAT_ERROR: Error listening to system settings:", error);
+                            console.error("Grazzy_ERROR: Error listening to system settings:", error);
                             showMessageBox("Failed to get real-time settings updates.", 'error', true);
                         });
                         unsubscribeListeners.push(unsubscribeSettings);
                         fetchSystemSettings();
                     } else {
-                        console.log("JCHAT_DEBUG: User is NOT admin after anonymous/custom sign-in. Displaying unauthorized message.");
+                        console.log("Grazzy_DEBUG: User is NOT admin after anonymous/custom sign-in. Displaying unauthorized message.");
                         if (unauthorizedMessage) unauthorizedMessage.style.display = 'flex';
                         if (systemSettingsForm) systemSettingsForm.style.display = 'none';
                         if (goHomeButton) {
@@ -1748,7 +1748,7 @@
                     }
                 } else {
                     // Final fallback if no user is authenticated at all
-                    console.log("JCHAT_DEBUG: No user authenticated at all. Redirecting to login.");
+                    console.log("Grazzy_DEBUG: No user authenticated at all. Redirecting to login.");
                     window.location.href = '/login.html';
                 }
             }
@@ -1756,7 +1756,7 @@
 
         // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("JCHAT_DEBUG: DOMContentLoaded fired.");
+            console.log("Grazzy_DEBUG: DOMContentLoaded fired.");
             const savedTheme = localStorage.getItem('jchat-theme');
             if (savedTheme && themes.includes(savedTheme)) {
                 applyTheme(savedTheme);
@@ -1792,7 +1792,7 @@
                 }
             });
             unsubscribeListeners = [];
-            console.log("JCHAT_DEBUG: All Firestore listeners detached.");
+            console.log("Grazzy_DEBUG: All Firestore listeners detached.");
         });
 
         if (cancelSettingsButton) cancelSettingsButton.addEventListener('click', resetSettingsToCurrent);

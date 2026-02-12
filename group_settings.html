@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - Group Settings</title>
+    <title>Grazzy - Group Settings</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
             box-sizing: border-box;
         }
 
-        /* Global CSS Variables (reused from other JCHAT pages for consistency) */
+        /* Global CSS Variables (reused from other Grazzy pages for consistency) */
         :root {
             --pink: #ff2e92;
             --blue: #00d5ff;
@@ -989,7 +989,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <ul>
                     <li><a href="/groups.html">Groups</a></li>
@@ -1631,7 +1631,7 @@
 
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayPicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 headerNavLinkProfile.href = `/profile.html?userId=${user.uid}`;
 
                 // Update JCoin and Gas display in header
@@ -1640,10 +1640,10 @@
 
                 logoutButton.disabled = false;
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayPicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
                 logoutButton.disabled = false;
             }
@@ -1701,9 +1701,9 @@
                     reviewTimestamp: null,
                     notes: ''
                 });
-                console.log(`JCHAT_DEBUG: Pending activity reward created for ${activityType}.`);
+                console.log(`Grazzy_DEBUG: Pending activity reward created for ${activityType}.`);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error creating pending activity reward:", error);
+                console.error("Grazzy_ERROR: Error creating pending activity reward:", error);
             }
         }
 
@@ -1753,7 +1753,7 @@
                 await fetchAndDisplayHeaderProfile(currentUser);
                 return true;
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deducting JCoins:", error);
+                console.error("Grazzy_ERROR: Error deducting JCoins:", error);
                 showMessageBox(`Failed to deduct JCoins: ${error.message}`, "error");
                 return false;
             }
@@ -1804,7 +1804,7 @@
                 }
                 return true;
             } catch (error) {
-                console.error("JCHAT_ERROR: Error adding JCoins/Gas:", error);
+                console.error("Grazzy_ERROR: Error adding JCoins/Gas:", error);
                 showMessageBox(`Failed to add JCoins/Gas to recipient: ${error.message}`, "error");
                 return false;
             }
@@ -1825,13 +1825,13 @@
          */
         function fetchGroupData() {
             if (!groupId) {
-                console.error("JCHAT_ERROR: No group ID provided in URL.");
+                console.error("Grazzy_ERROR: No group ID provided in URL.");
                 showMessageBox("No group ID provided in URL. Redirecting...", "error", 3000, true);
                 setTimeout(() => { window.location.href = '/Groups.html'; }, 3000);
                 return;
             }
             if (!currentUser) {
-                console.log("JCHAT_DEBUG: fetchGroupData called but currentUser is null. Waiting for auth.");
+                console.log("Grazzy_DEBUG: fetchGroupData called but currentUser is null. Waiting for auth.");
                 return; // Wait for authentication
             }
 
@@ -1848,7 +1848,7 @@
                     }
 
                     currentGroupData = { id: docSnap.id, ...docSnap.data() };
-                    console.log("JCHAT_DEBUG: Fetched group data:", currentGroupData);
+                    console.log("Grazzy_DEBUG: Fetched group data:", currentGroupData);
 
                     // Check if current user is the admin
                     if (currentUser && currentGroupData.admin === currentUser.uid) {
@@ -1865,14 +1865,14 @@
                         showMessageBox("Access Denied: You are not the administrator of this group.", "error", 5000, true);
                     }
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error processing group data snapshot:", error);
+                    console.error("Grazzy_ERROR: Error processing group data snapshot:", error);
                     showMessageBox(`Error loading group data: ${error.message}`, "error", 5000, true);
                     accessDeniedMessage.textContent = `Error loading group data: ${error.message}`;
                     accessDeniedMessage.style.display = 'block';
                     groupSettingsContent.style.display = 'none';
                 }
             }, (error) => {
-                console.error("JCHAT_ERROR: Error fetching group data with onSnapshot:", error);
+                console.error("Grazzy_ERROR: Error fetching group data with onSnapshot:", error);
                 showMessageBox(`Error loading group data: ${error.message}`, "error", 5000, true);
                 accessDeniedMessage.textContent = `Error loading group data: ${error.message}`;
                 accessDeniedMessage.style.display = 'block';
@@ -1918,7 +1918,7 @@
                     adminUsernameSpan.textContent = currentGroupData.admin.substring(0, 8);
                 }
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching admin username:", error);
+                console.error("Grazzy_ERROR: Error fetching admin username:", error);
                 adminUsernameSpan.textContent = currentGroupData.admin.substring(0, 8); // Fallback to ID
             }
 
@@ -2009,7 +2009,7 @@
                     });
                 });
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching group members:", error);
+                console.error("Grazzy_ERROR: Error fetching group members:", error);
                 memberList.innerHTML = `<p style="text-align: center; color: var(--text-light);">Error loading members: ${error.message}</p>`;
                 showMessageBox(`Error loading members: ${error.message}`, 'error');
             }
@@ -2050,7 +2050,7 @@
                 });
                 showMessageBox("Group information updated successfully!", "success");
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving group info:", error);
+                console.error("Grazzy_ERROR: Error saving group info:", error);
                 showMessageBox(`Failed to save group info: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(saveGroupInfoBtn, false);
@@ -2104,7 +2104,7 @@
 
                 showMessageBox(`${memberName} removed from the group.`, "success");
             } catch (error) {
-                console.error("JCHAT_ERROR: Error removing member:", error);
+                console.error("Grazzy_ERROR: Error removing member:", error);
                 showMessageBox(`Failed to remove member: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(buttonElement, false);
@@ -2307,7 +2307,7 @@
                 showMessageBox(`Successfully withdrew ${amount} ${type.toUpperCase()} from vault!`, "success");
                 withdrawAmountInput.value = ''; // Clear input
             } catch (error) {
-                console.error("JCHAT_ERROR: Error withdrawing from vault:", error);
+                console.error("Grazzy_ERROR: Error withdrawing from vault:", error);
                 showMessageBox(`Failed to withdraw: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(withdrawFromVaultBtn, false);
@@ -2357,7 +2357,7 @@
                     window.location.href = '/Groups.html'; // Redirect back to groups page
                 }, 3000);
             } catch (error) {
-                console.error("JCHAT_ERROR: Error deleting group:", error);
+                console.error("Grazzy_ERROR: Error deleting group:", error);
                 showMessageBox(`Failed to delete group: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(deleteGroupBtn, false);
@@ -2431,7 +2431,7 @@
                 showMessageBox(`Group "${currentGroupData.name}" promoted successfully for ${durationDays} days!`, "success");
                 promoteGroupModal.classList.remove('active');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error promoting group:", error);
+                console.error("Grazzy_ERROR: Error promoting group:", error);
                 showMessageBox(`Failed to promote group: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(submitPromoteGroupBtn, false);
@@ -2503,7 +2503,7 @@
                 showMessageBox(`${type.toUpperCase()} Boost activated for ${durationHours} hours for "${currentGroupData.name}"!`, "success");
                 activateGroupBoostModal.classList.remove('active');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error activating boost:", error);
+                console.error("Grazzy_ERROR: Error activating boost:", error);
                 showMessageBox(`Failed to activate boost: ${error.message}`, "error");
             } finally {
                 toggleButtonLoading(submitActivateBoostBtn, false);
@@ -2515,7 +2515,7 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
-                console.log("JCHAT_DEBUG: User authenticated in Group Settings Page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Group Settings Page:", user.uid);
                 await fetchAndDisplayHeaderProfile(user); // Fetch profile for header and global state
                 fetchNotificationCount(user.uid);
 
@@ -2524,7 +2524,7 @@
                     isAuthReady = true; // Set auth ready after current user is established
                     fetchGroupData(); // Fetch group data and check admin status
                 } else {
-                    console.error("JCHAT_ERROR: No group ID provided in URL.");
+                    console.error("Grazzy_ERROR: No group ID provided in URL.");
                     showMessageBox("No group ID provided in URL. Redirecting to Groups page...", "error", 3000, true);
                     setTimeout(() => {
                         window.location.href = '/Groups.html';
@@ -2532,19 +2532,19 @@
                 }
 
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                         // onAuthStateChanged will be triggered again with the new user
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                         // onAuthStateChanged will be triggered again with the new user
                     }
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     // If anonymous sign-in also fails, redirect to login
                     if (!auth.currentUser) {
                         isAuthReady = false;

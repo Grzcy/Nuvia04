@@ -39,9 +39,9 @@ The tool automatically tracks:
 ## 🔐 **How Codes Work**
 
 ### **Code Format:**
-- **Basic**: `JCHATB[timestamp][random]` (e.g., JCHATBABC123DEF456)
-- **Pro**: `JCHATP[timestamp][random]` (e.g., JCHATPABC123DEF456)
-- **Ultimate**: `JCHATU[timestamp][random]` (e.g., JCHATUABC123DEF456)
+- **Basic**: `GrazzyB[timestamp][random]` (e.g., GrazzyBABC123DEF456)
+- **Pro**: `GrazzyP[timestamp][random]` (e.g., GrazzyPABC123DEF456)
+- **Ultimate**: `GrazzyU[timestamp][random]` (e.g., GrazzyUABC123DEF456)
 
 ### **Code Security:**
 - **Unique**: Each code is completely unique
@@ -60,7 +60,7 @@ When you click "Send Code", it automatically:
 
 ### **Message Format:**
 ```
-🎉 Your JCHAT Premium is ready!
+🎉 Your Grazzy Premium is ready!
 
 User: [username]
 Tier: [Premium Tier]
@@ -68,7 +68,7 @@ Unlock Code: [CODE]
 
 Enter this code on your profile page to unlock premium features!
 
-Thank you for choosing JCHAT Premium! 🚀
+Thank you for choosing Grazzy Premium! 🚀
 ```
 
 ## 🎯 **Workflow for Making Money**
@@ -94,7 +94,7 @@ Thank you for choosing JCHAT Premium! 🚀
 ### **Database Structure:**
 ```javascript
 premium_codes: {
-  code: "JCHATBABC123DEF456",
+  code: "GrazzyBABC123DEF456",
   userId: "user123",
   tier: "basic",
   generatedAt: timestamp,

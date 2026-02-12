@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuvia - My Friends</title>
+    <title>Grazzy - My Friends</title>
 
     <!-- Google Fonts: Poppins for headings, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -921,7 +921,7 @@
 
     <header>
         <div class="header-content-wrapper">
-            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Nuvia Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+            <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
             <nav>
                 <!-- Navigation links removed as per user request -->
                 <ul>
@@ -1093,7 +1093,7 @@
             // } else if (type === 'info') {
             //     infoSynth.triggerAttackRelease("E4", "16n"); // E4 note, 16th note duration
             // }
-            console.log(`JCHAT_DEBUG: Sound notification for type: ${type} (functionality removed)`);
+            console.log(`Grazzy_DEBUG: Sound notification for type: ${type} (functionality removed)`);
         }
 
         /**
@@ -1183,7 +1183,7 @@
         function showCustomConfirm(message) {
             return new Promise((resolve) => {
                 if (!customConfirmModal || !confirmModalMessage || !confirmYesBtn || !confirmNoBtn) {
-                    console.error("JCHAT_ERROR: Custom confirmation modal elements not found.");
+                    console.error("Grazzy_ERROR: Custom confirmation modal elements not found.");
                     resolve(false); // Fallback to false if elements are missing
                     return;
                 }
@@ -1246,7 +1246,7 @@
                     imgElement.style.display = 'block';
                     iconElement.style.display = 'none';
                     imgElement.onerror = () => {
-                        console.error(`JCHAT_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
+                        console.error(`Grazzy_ERROR: Failed to load profile picture: ${profilePicId}. Using placeholder.`);
                         imgElement.src = `https://placehold.co/40x40/CCCCCC/000000?text=${usernameInitial}`;
                         imgElement.style.display = 'block';
                         iconElement.style.display = 'none';
@@ -1265,7 +1265,7 @@
          * @param {firebase.User} user - The authenticated Firebase user object.
          */
         async function fetchAndDisplayHeaderProfile(user) {
-            console.log("JCHAT_DEBUG: fetchAndDisplayHeaderProfile called for user:", user.uid);
+            console.log("Grazzy_DEBUG: fetchAndDisplayHeaderProfile called for user:", user.uid);
             try {
                 const privateProfileDocRef = doc(db, "artifacts", appId, "users", user.uid, "profiles", "user_profile");
                 const privateDocSnap = await getDoc(privateProfileDocRef);
@@ -1273,10 +1273,10 @@
                 let profileData = null;
                 if (privateDocSnap.exists()) {
                     profileData = privateDocSnap.data();
-                    console.log("JCHAT_DEBUG: Fetched existing profile data for header:", profileData);
+                    console.log("Grazzy_DEBUG: Fetched existing profile data for header:", profileData);
                 } else {
                     // If private profile doesn't exist, create a basic one
-                    console.warn("JCHAT_WARN: Private profile not found for header, creating a new one.");
+                    console.warn("Grazzy_WARN: Private profile not found for header, creating a new one.");
                     profileData = {
                         username: user.displayName || `User_${user.uid.substring(0, 8)}`,
                         email: user.email || "",
@@ -1320,12 +1320,12 @@
                 }
 
                 currentUserProfileData = profileData;
-                console.log("JCHAT_DEBUG: currentUserProfileData set:", currentUserProfileData);
+                console.log("Grazzy_DEBUG: currentUserProfileData set:", currentUserProfileData);
 
                 // Update header UI
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
 
                 // Safely set href for profileLink if it exists
                 if (profileLink) {
@@ -1343,10 +1343,10 @@
                 }
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
             }
         }
@@ -1374,7 +1374,7 @@
                 // Return the unsubscribe function to be called on page unload
                 return unsubscribe;
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching notification count:", error);
+                console.error("Grazzy_ERROR: Error fetching notification count:", error);
                 if (notificationCountElement) notificationCountElement.style.display = 'none';
                 return () => {}; // Return a no-op function if an error occurs
             }
@@ -1520,7 +1520,7 @@
                 showMessageBox(`${friendUsername} has been removed from your friends.`, 'success');
                 playNotificationSound('success');
             } catch (error) {
-                console.error("JCHAT_ERROR: Error removing friend:", error);
+                console.error("Grazzy_ERROR: Error removing friend:", error);
                 showMessageBox(`Failed to remove friend: ${error.message}`, 'error');
                 playNotificationSound('error');
             } finally {
@@ -1534,7 +1534,7 @@
          */
         async function setupFriendUnreadCountListeners() {
             if (!currentUser) {
-                console.log("JCHAT_DEBUG: No current user to set up friend unread count listeners.");
+                console.log("Grazzy_DEBUG: No current user to set up friend unread count listeners.");
                 return;
             }
 
@@ -1548,7 +1548,7 @@
             // Listener for the current user's friends list
             const unsubFriends = onSnapshot(friendsCollectionRef, (friendsSnapshot) => {
                 const currentFriendIds = friendsSnapshot.docs.map(doc => doc.id);
-                console.log("JCHAT_DEBUG: Friends list updated:", currentFriendIds);
+                console.log("Grazzy_DEBUG: Friends list updated:", currentFriendIds);
 
                 // Re-initialize counts for all friends
                 unreadMessageCountsByFriendId = {};
@@ -1562,7 +1562,7 @@
                 fetchAndDisplayFriends();
 
             }, (error) => {
-                console.error("JCHAT_ERROR: Error listening to friends list for unread counts:", error);
+                console.error("Grazzy_ERROR: Error listening to friends list for unread counts:", error);
             });
             unsubscribeAllFriendUnreadListeners.push(unsubFriends);
         }
@@ -1605,13 +1605,13 @@
                     // Re-render the friends list to update badges
                     fetchAndDisplayFriends(); // This will trigger a re-render of the friends list
                 } catch (error) {
-                    console.error(`JCHAT_ERROR: Error fetching unread messages for friend ${friendId}:`, error);
+                    console.error(`Grazzy_ERROR: Error fetching unread messages for friend ${friendId}:`, error);
                     // On error, set count to 0 for this friend to avoid displaying stale data
                     unreadMessageCountsByFriendId[friendId] = 0;
                     fetchAndDisplayFriends(); // Re-render to reflect the change
                 }
             }, (error) => {
-                console.error(`JCHAT_ERROR: Error listening to chat metadata for friend ${friendId}:`, error);
+                console.error(`Grazzy_ERROR: Error listening to chat metadata for friend ${friendId}:`, error);
             });
             unsubscribeAllFriendUnreadListeners.push(unsubChatMetadata); // Add to the master list of unsubs
         }
@@ -1658,7 +1658,7 @@
                 renderFriendsList(fetchedFriends, friendSearchInput.value);
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching friends for display:", error);
+                console.error("Grazzy_ERROR: Error fetching friends for display:", error);
                 showMessageBox(`Error loading friends list: ${error.message}`, 'error');
                 friendsLoading.style.display = 'none';
                 friendsEmptyState.textContent = "Failed to load friends list. Please try again.";
@@ -1674,24 +1674,24 @@
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
-                console.log("JCHAT_DEBUG: User authenticated in Friends Page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Friends Page:", user.uid);
                 await fetchAndDisplayHeaderProfile(user);
                 fetchNotificationCount(user.uid); // For the bell icon
                 setupFriendUnreadCountListeners(); // For friend message badges and initial load
 
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                     // onAuthStateChanged will be triggered again with the new user
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     // If anonymous sign-in also fails, redirect to login
                     if (!auth.currentUser) {
                         isAuthReady = false;

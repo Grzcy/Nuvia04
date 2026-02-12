@@ -4,7 +4,7 @@
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCHAT - Privacy Settings</title>
+    <title>Grazzy - Privacy Settings</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -796,7 +796,7 @@
 <body class="theme-dark-mode">
 
     <header>
-        <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="JCHAT Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Nuvia</span></a>
+        <a href="/index.html" class="logo" style="display:flex;align-items:center;gap:10px"><img src="assets/security.png" alt="Grazzy Security" style="height:24px;width:auto" onerror="this.style.display='none'"><span>Grazzy</span></a>
         <div class="user-profile-header">
             <a href="/profile.html" id="profileLink">
                 <img id="headerProfilePic" src="" alt="Profile Picture" style="display: none;">
@@ -1119,7 +1119,7 @@
         function showCustomConfirm(message) {
             return new Promise((resolve) => {
                 if (!customConfirmModal || !confirmModalMessage || !confirmYesBtn || !confirmNoBtn) {
-                    console.error("JCHAT_ERROR: Custom confirmation modal elements not found.");
+                    console.error("Grazzy_ERROR: Custom confirmation modal elements not found.");
                     resolve(false);
                     return;
                 }
@@ -1284,7 +1284,7 @@
                 // Update header UI
                 const usernameInitial = (profileData.username || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, profileData?.profilePicId, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = profileData.username || "JCHAT User";
+                headerDisplayName.textContent = profileData.username || "Grazzy User";
                 document.getElementById('profileLink').href = `/profile.html?userId=${user.uid}`;
 
                 logoutButton.disabled = false;
@@ -1292,10 +1292,10 @@
                 // Admin icon is removed from header, so no need to manage its display here.
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching or creating profile for header:", error);
+                console.error("Grazzy_ERROR: Error fetching or creating profile for header:", error);
                 const usernameInitial = (user.displayName || "J").charAt(0).toUpperCase();
                 displayProfilePicture(headerProfilePic, headerAvatarIcon, user.photoURL, usernameInitial, "w_70,h_70,c_fill,g_face,r_max");
-                headerDisplayName.textContent = user.displayName || "JCHAT User";
+                headerDisplayName.textContent = user.displayName || "Grazzy User";
                 showMessageBox(`Error loading header profile: ${error.message}`, 'error');
                 logoutButton.disabled = false;
             }
@@ -1323,7 +1323,7 @@
 
                 if (docSnap.exists()) {
                     currentPrivacySettings = docSnap.data();
-                    console.log("JCHAT_DEBUG: Fetched privacy settings:", currentPrivacySettings);
+                    console.log("Grazzy_DEBUG: Fetched privacy settings:", currentPrivacySettings);
                 } else {
                     // Default settings if document doesn't exist
                     currentPrivacySettings = {
@@ -1353,7 +1353,7 @@
                     };
                     // Create the document with default settings
                     await setDoc(privacyDocRef, currentPrivacySettings);
-                    console.log("JCHAT_DEBUG: Created default privacy settings.");
+                    console.log("Grazzy_DEBUG: Created default privacy settings.");
                 }
 
                 // Populate checkboxes
@@ -1394,7 +1394,7 @@
                 showMessageBox("Privacy settings loaded!", 'success');
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error fetching privacy settings:", error);
+                console.error("Grazzy_ERROR: Error fetching privacy settings:", error);
                 showMessageBox(`Error loading settings: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(savePrivacySettingsButton, false);
@@ -1482,7 +1482,7 @@
                 // Re-fetch settings to update UI
                 await fetchPrivacySettings();
             } catch (error) {
-                console.error("JCHAT_ERROR: Error adding user to block list:", error);
+                console.error("Grazzy_ERROR: Error adding user to block list:", error);
                 showMessageBox(`Failed to block user: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(addBlockUserButton, false);
@@ -1518,7 +1518,7 @@
                 // Re-fetch settings to update UI
                 await fetchPrivacySettings();
             } catch (error) {
-                console.error("JCHAT_ERROR: Error removing user from block list:", error);
+                console.error("Grazzy_ERROR: Error removing user from block list:", error);
                 showMessageBox(`Failed to unblock user: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(buttonElement, false);
@@ -1586,7 +1586,7 @@
                 showMessageBox("Privacy settings saved successfully!", 'success');
 
             } catch (error) {
-                console.error("JCHAT_ERROR: Error saving privacy settings:", error);
+                console.error("Grazzy_ERROR: Error saving privacy settings:", error);
                 showMessageBox(`Failed to save settings: ${error.message}`, 'error');
             } finally {
                 toggleButtonLoading(savePrivacySettingsButton, false);
@@ -1650,25 +1650,25 @@
             if (user) {
                 currentUser = user;
                 isAuthReady = true;
-                console.log("JCHAT_DEBUG: User authenticated in Privacy Settings Page:", user.uid);
+                console.log("Grazzy_DEBUG: User authenticated in Privacy Settings Page:", user.uid);
                 await fetchAndDisplayHeaderProfile(user); // Update header
                 await fetchPrivacySettings(); // Fetch and populate privacy settings
 
                 // Admin icon is removed from header, no need to manage its display here.
 
             } else {
-                console.log("JCHAT_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
+                console.log("Grazzy_DEBUG: No user signed in. Attempting anonymous sign-in or redirecting to login page.");
                 try {
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("JCHAT_DEBUG: Signed in with custom token.");
+                        console.log("Grazzy_DEBUG: Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
-                        console.log("JCHAT_DEBUG: Signed in anonymously.");
+                        console.log("Grazzy_DEBUG: Signed in anonymously.");
                     }
                     // onAuthStateChanged will be triggered again with the new user
                 } catch (error) {
-                    console.error("JCHAT_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
+                    console.error("Grazzy_ERROR: Error during anonymous sign-in or custom token sign-in:", error);
                     if (!auth.currentUser) {
                         window.location.href = '/login.html';
                     }
