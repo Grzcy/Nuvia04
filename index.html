@@ -3,7 +3,7 @@
 <head>
     <!-- Last updated: 2025-08-21T18:19:29Z -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Grazzy - Home</title>
     <link rel="canonical" href="https://grazzy.app/index.html">
     <link rel="manifest" href="/manifest.webmanifest">
@@ -77,6 +77,33 @@
     <style>
       /* Rendering hints to speed up first paint by skipping offscreen rendering */
       .content-wrapper, .about-nuvia-section, #peopleMayKnow, #globalAnnouncementsSection, #postsFeed { content-visibility: auto; contain-intrinsic-size: 1000px 800px; }
+      
+      /* Instagram-like Responsive Fixes */
+      html { overflow-x: hidden; width: 100%; font-size: 16px; }
+      body { overflow-x: hidden; width: 100%; max-width: 100vw; position: relative; }
+      * { max-width: 100%; }
+      
+      /* Responsive font sizing */
+      @media (max-width: 1200px) { html { font-size: 15px; } }
+      @media (max-width: 992px) { html { font-size: 14px; } }
+      @media (max-width: 768px) { html { font-size: 14px; } }
+      @media (max-width: 576px) { html { font-size: 14px; } }
+      @media (max-width: 400px) { html { font-size: 13px; } }
+      
+      /* Prevent text overflow */
+      p, span, div, a, button, input, textarea { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; }
+      
+      /* Responsive media */
+      img, video, iframe, embed, object { max-width: 100%; height: auto; }
+      
+      /* Responsive containers */
+      .content-wrapper, main, .container, .post-card, .about-nuvia-section { max-width: 100%; overflow-x: hidden; }
+      
+      /* iOS Safari fixes */
+      @supports (-webkit-touch-callout: none) {
+        body { min-height: -webkit-fill-available; }
+        input, textarea, select { font-size: 16px !important; }
+      }
     </style>
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous" defer></script>
     <!-- Tone.js for audio notifications -->
