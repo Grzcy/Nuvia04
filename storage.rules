@@ -1,0 +1,59 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return request.auth.token.admin == true;
+    }
+    
+    // Profile pictures
+    match /users/{userId}/profile/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && isOwner(userId);
+      allow delete: if isSignedIn() && (isOwner(userId) || isAdmin());
+    }
+    
+    // Post images and media
+    match /posts/{postId}/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+      allow delete: if isSignedIn() && (request.auth.uid == resource.metadata.userId || isAdmin());
+    }
+    
+    // Group images
+    match /groups/{groupId}/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+      allow delete: if isSignedIn() && isAdmin();
+    }
+    
+    // Chat media
+    match /chats/{chatId}/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+      allow delete: if isSignedIn() && isAdmin();
+    }
+    
+    // Admin uploads
+    match /admin/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && isAdmin();
+      allow delete: if isSignedIn() && isAdmin();
+    }
+    
+    // Deny everything else
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}

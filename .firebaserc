@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "grazzy-9e736",
+    "production": "grazzy-9e736",
+    "development": "grazzy-9e736"
+  },
+  "targets": {},
+  "etags": {}
+}
