@@ -800,10 +800,14 @@
                         errorMessage = 'Network error. Please check your internet connection.';
                         break;
                     case 'auth/too-many-requests':
-                        errorMessage = 'Too many failed attempts. Please try again later.';
-                        break;
-                    default:
-                        errorMessage = `Authentication failed: ${error.message}`;
+                            errorMessage = 'Too many failed attempts. Please try again later.';
+                            break;
+                        case 'auth/configuration-not-found':
+                            errorMessage = 'Firebase Authentication is not configured. Please enable Email/Password authentication in Firebase Console.';
+                            console.error('SETUP REQUIRED: Go to Firebase Console → Authentication → Sign-in method → Enable Email/Password');
+                            break;
+                        default:
+                            errorMessage = `Authentication failed: ${error.message}`;
                 }
                 
                 showError(errorMessage);
