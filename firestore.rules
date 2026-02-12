@@ -1,0 +1,118 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(uid) {
+      return request.auth.uid == uid;
+    }
+    
+    function isAdmin() {
+      return request.auth.token.admin == true;
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isOwner(userId);
+      allow update: if isSignedIn() && isOwner(userId);
+      allow delete: if isSignedIn() && (isOwner(userId) || isAdmin());
+      
+      // User subcollections
+      match /profile/{document=**} {
+        allow read: if isSignedIn();
+        allow write: if isSignedIn() && isOwner(userId);
+      }
+      
+      match /wallet/{document=**} {
+        allow read: if isSignedIn() && isOwner(userId);
+        allow write: if isSignedIn() && isOwner(userId);
+      }
+      
+      match /badges/{document=**} {
+        allow read: if isSignedIn();
+        allow write: if isSignedIn() && isOwner(userId);
+      }
+      
+      match /notifications/{document=**} {
+        allow read: if isSignedIn() && isOwner(userId);
+        allow write: if isSignedIn();
+      }
+    }
+    
+    // Posts collection
+    match /posts/{postId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.userId;
+      allow update: if isSignedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+      allow delete: if isSignedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+      
+      // Comments subcollection
+      match /comments/{commentId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() && request.auth.uid == request.resource.data.userId;
+        allow update: if isSignedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+        allow delete: if isSignedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+      }
+      
+      // Reactions subcollection
+      match /reactions/{reactionId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() && request.auth.uid == request.resource.data.userId;
+        allow delete: if isSignedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+      }
+    }
+    
+    // Groups collection
+    match /groups/{groupId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && request.auth.uid == resource.data.createdBy;
+      allow delete: if isSignedIn() && (request.auth.uid == resource.data.createdBy || isAdmin());
+      
+      // Group members subcollection
+      match /members/{memberId} {
+        allow read: if isSignedIn();
+        allow write: if isSignedIn() && (request.auth.uid == get(/databases/$(database)/documents/groups/$(groupId)).data.createdBy || isAdmin());
+      }
+      
+      // Group messages subcollection
+      match /messages/{messageId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() && request.auth.uid == request.resource.data.senderId;
+        allow delete: if isSignedIn() && (request.auth.uid == resource.data.senderId || isAdmin());
+      }
+    }
+    
+    // Direct messages collection
+    match /directMessages/{messageId} {
+      allow read: if isSignedIn() && (request.auth.uid == resource.data.senderId || request.auth.uid == resource.data.recipientId);
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.senderId;
+      allow delete: if isSignedIn() && (request.auth.uid == resource.data.senderId || isAdmin());
+    }
+    
+    // Admin collection
+    match /admin/{document=**} {
+      allow read: if isSignedIn() && isAdmin();
+      allow write: if isSignedIn() && isAdmin();
+    }
+    
+    // Reports collection
+    match /reports/{reportId} {
+      allow read: if isSignedIn() && (request.auth.uid == resource.data.reportedBy || isAdmin());
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (isAdmin() || request.auth.uid == resource.data.reportedBy);
+      allow delete: if isSignedIn() && isAdmin();
+    }
+    
+    // Settings collection
+    match /settings/{document=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && isAdmin();
+    }
+  }
+}
