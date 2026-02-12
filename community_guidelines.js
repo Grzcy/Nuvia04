@@ -5,6 +5,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
             apiKey: "AIzaSyAm8ghbQ_lwJdNXEhWGos0eyi5wtvGuRR4",
             authDomain: "grazzy-9e736.firebaseapp.com",
+            databaseURL: "https://grazzy-9e736-default-rtdb.firebaseio.com",
             projectId: "grazzy-9e736",
             storageBucket: "grazzy-9e736.firebasestorage.app",
             messagingSenderId: "750326949170",
