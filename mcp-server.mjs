@@ -10,9 +10,19 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const genAI = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
+// Lazy initialize Gemini API (allows server to start without key)
+let genAI = null;
+function initializeGenAI() {
+  if (!genAI) {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY is not set. Please provide it as an environment variable.");
+    }
+    genAI = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+  }
+  return genAI;
+}
 
 // --- MCP Endpoint ---
 app.post("/mcp", async (req, res) => {
@@ -22,7 +32,8 @@ app.post("/mcp", async (req, res) => {
       return res.status(400).json({ error: "Missing prompt" });
     }
 
-    const result = await genAI.models.generateContent({
+    const api = initializeGenAI();
+    const result = await api.models.generateContent({
       model: "gemini-2.0-flash",
       contents: [{ role: "user", parts: [{ text: prompt }] }],
     });
