@@ -35,46 +35,97 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .login-container {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 60px rgba(102, 126, 234, 0.2);
             width: 100%;
             max-width: 380px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), 0 0 80px rgba(240, 147, 251, 0.3);
         }
 
         .login-header {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .jchat-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: #ff2e63;
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
+            letter-spacing: -1px;
         }
 
         .login-header h1 {
-            font-size: 24px;
-            font-weight: 400;
-            margin-bottom: 5px;
-            color: #333;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .login-header p {
-            color: #666;
+            color: #888;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .form-group {
@@ -91,16 +142,20 @@
 
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 13px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #ff2e63;
-            box-shadow: 0 0 0 2px rgba(255, 46, 99, 0.1);
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15), 0 4px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
         }
 
         .password-group {
@@ -134,26 +189,44 @@
         }
 
         .forgot-password {
-            color: #ff2e63;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            opacity: 0.8;
         }
 
         .login-btn {
             width: 100%;
-            background: #ff2e63;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 10px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             margin-bottom: 20px;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .login-btn:hover {
-            background: #e01e54;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2 0%, #f093fb 50%, #667eea 100%);
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
         }
 
         .divider {
@@ -174,8 +247,10 @@
         }
 
         .divider span {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 0 20px;
+            color: #999;
+            font-weight: 500;
         }
 
         .signup-link {
@@ -185,9 +260,17 @@
         }
 
         .signup-link a {
-            color: #ff2e63;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            opacity: 0.8;
         }
 
         .error-message {
