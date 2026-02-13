@@ -290,13 +290,13 @@ service cloud.firestore {
       
       // System Settings
       match /public/data/settings/{settingId} {
-        allow read: if isSignedIn();
+        allow read: if true;
         allow write: if isSignedIn() && isAdmin();
       }
-      
+
       // System Settings (alternative path)
       match /public/data/system_settings/{settingId} {
-        allow read: if isSignedIn();
+        allow read: if true;
         allow write: if isSignedIn() && isAdmin();
       }
       
