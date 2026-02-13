@@ -288,14 +288,20 @@ service cloud.firestore {
         allow delete: if isSignedIn() && isAdmin();
       }
       
-      // System Settings
+      // System Settings - PUBLIC READ ACCESS (highest priority)
       match /public/data/settings/{settingId} {
-        allow read: if true;
+        allow read: if true;  // Allow anyone to read (no authentication required)
         allow write: if isSignedIn() && isAdmin();
       }
 
-      // System Settings (alternative path)
+      // System Settings (alternative path) - PUBLIC READ ACCESS
       match /public/data/system_settings/{settingId} {
+        allow read: if true;  // Allow anyone to read (no authentication required)
+        allow write: if isSignedIn() && isAdmin();
+      }
+
+      // Catch-all for settings/configuration collections - ensure public access
+      match /public/data/settings/{document=**} {
         allow read: if true;
         allow write: if isSignedIn() && isAdmin();
       }
